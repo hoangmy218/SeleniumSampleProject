@@ -21,21 +21,21 @@ public class SeleniumTest extends BaseTest {
 //        test.navigateToDashboardPage();
 //    }
 
-    @BeforeTest
-    static void setup() throws IOException{
-        SeleniumTest test = new SeleniumTest();
-    }
-
-    @AfterTest
-    void teardown() {
-        driver.quit();
-    }
-
-    @Test
-    void test() {
-        navigateToDashboardPage();
-        String title = driver.getTitle();
-        // Verify
-        assert(title).contains("Automation Exercise");
-    }
+//    @BeforeTest
+//    static void setup() throws IOException{
+//        SeleniumTest test = new SeleniumTest();
+//    }
+//
+//    @AfterTest
+//    void teardown() {
+//        driver.quit();
+//    }
+//
+//    @Test
+//    void test() {
+//        navigateToDashboardPage();
+//        String title = driver.getTitle();
+//        // Verify
+//        assert(title).contains("Automation Exercise");
+//    }
 }

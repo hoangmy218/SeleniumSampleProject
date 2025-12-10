@@ -1,16 +1,53 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class DriverFactory {
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+//    private static List<WebDriverThread> threadList = new ArrayList<WebDriverThread>();
+    private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
+    private static ThreadLocal<WebDriverThread> driverThread;
 
-
-    public static WebDriver getDriver() {
-        if (driver.get() == null) {
-            WebDriverManager.chromedriver().setup();
-            driver.set(new ChromeDriver());
-        }
-        return driver.get();
+    @BeforeSuite
+    public static void instantiateDriverObject() {
+        driverThread = new ThreadLocal<WebDriverThread>() {
+            @Override
+            protected WebDriverThread initialValue() {
+                WebDriverThread webDriverThread = new WebDriverThread();
+                webDriverThreadPool.add(webDriverThread);
+                return webDriverThread;
+            }
+        };
     }
+
+    public static WebDriver getDriver() throws Exception {
+        return driverThread.get().getDriver();
+    }
+
+    @AfterMethod
+    public static void clearCookies() throws Exception {
+        getDriver().manage().deleteAllCookies();
+    }
+
+    @AfterSuite
+    public static void closeDriverObjects() {
+        for (WebDriverThread webDriverThread: webDriverThreadPool) {
+            webDriverThread.quitDriver();
+        }
+    }
+
+//    public static WebDriver getDriver() {
+//        if (driver.get() == null) {
+//            WebDriverManager.chromedriver().setup();
+//            driver.set(new ChromeDriver());
+//        }
+//        return driver.get();
+//    }
 }
