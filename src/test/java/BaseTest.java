@@ -7,7 +7,7 @@ public class BaseTest {
     BasePage basePage;
 
     public BaseTest() throws IOException {
-//        driver = DriverFactory.getDriver();
+//        driver = driver.DriverFactory.getDriver();
         basePage = new BasePage(driver);
     }
 }
