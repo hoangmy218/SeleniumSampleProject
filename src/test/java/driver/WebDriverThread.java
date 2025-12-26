@@ -1,10 +1,6 @@
 package driver;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 
@@ -15,21 +11,13 @@ public class WebDriverThread {
     private WebDriver webDriver;
     private DriverType selectedDriverType;
     private final DriverType defaultDriverType = CHROME;
-    private final String defaultHeadless = "no";
     private final String browser = System.getProperty("browser").toUpperCase();
     private final String operatingSystem = System.getProperty("os.name").toUpperCase();
     private final String systemArchitecture = System.getProperty("os.arch");
-
-
-
+    
     public WebDriver getDriver() throws Exception {
-        if (null == webDriver) {
-            System.out.println(" ");
-            System.out.println("Current Operating System: " + operatingSystem);
-            System.out.println("Current Architecture: " + systemArchitecture);
+        if (webDriver == null) {
             selectedDriverType = determineEffectiveDriveType();
-            System.out.println("Current Browser Selection: " + selectedDriverType);
-            System.out.println(" ");
             instantiateWebDriver();
         }
         return webDriver;

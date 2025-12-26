@@ -19,7 +19,6 @@
         <!-- Configurable variables -->
         <threads>1</threads>
         <browser>chrome</browser>
-        <overwrite.binaries>false</overwrite.binaries>
     </properties>
 
     <build>
