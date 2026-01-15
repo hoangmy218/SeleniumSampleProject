@@ -9,15 +9,18 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class BasicTestWD extends DriverFactory {
+
+
     private void shopExampleThatSearchesFor (final String searchString) throws Exception {
         WebDriver driver = DriverFactory.getDriver();
 
         driver.get("https://automationexercise.com/products");
 
-        WebElement searchField = driver.findElement(By.name("search"));
-
-        searchField.clear();
-        searchField.sendKeys(searchString);
+//        WebElement searchField = driver.findElement(By.name("search"));
+        BaseTest baseTest = new BaseTest();
+        baseTest.clearAndType(By.name("search"), searchString);
+//        searchField.clear();
+//        searchField.sendKeys(searchString);
 
         System.out.println("URL is: " + driver.getCurrentUrl());
 

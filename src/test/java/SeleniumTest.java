@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class SeleniumTest extends BaseTest {
 
-    public SeleniumTest() throws IOException {
+    public SeleniumTest() throws Exception {
         super();
     }
 

@@ -1,9 +1,11 @@
 package driver;
 
+import listeners.ScreenshotListener;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,11 +16,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+@Listeners(ScreenshotListener.class)
 public class DriverFactory {
 //    private static List<driver.WebDriverThread> threadList = new ArrayList<driver.WebDriverThread>();
     private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
     private static ThreadLocal<WebDriverThread> driverThread;
     public static Properties credentials;
+    public static int implicitWaitTimeInSeconds = 15;
 
 
     //Load System Config from application.properties
@@ -81,6 +85,7 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() throws Exception {
+        System.out.println("WebDriver: " + driverThread.get());
         return driverThread.get().getDriver();
     }
 

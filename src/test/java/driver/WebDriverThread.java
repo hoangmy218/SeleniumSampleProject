@@ -14,7 +14,7 @@ public class WebDriverThread {
     private final String browser = System.getProperty("browser").toUpperCase();
     private final String operatingSystem = System.getProperty("os.name").toUpperCase();
     private final String systemArchitecture = System.getProperty("os.arch");
-    
+
     public WebDriver getDriver() throws Exception {
         if (webDriver == null) {
             selectedDriverType = determineEffectiveDriveType();
