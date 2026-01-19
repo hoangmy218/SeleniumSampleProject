@@ -44,7 +44,7 @@
                         <screenshotDirectory>${project.build.directory}/screenshots</screenshotDirectory>
                     </systemProperties>
                     <includes>
-                        <include>**/*WD.java</include>
+                        <include>**/*.java</include>
                     </includes>
                 </configuration>
                 <executions>

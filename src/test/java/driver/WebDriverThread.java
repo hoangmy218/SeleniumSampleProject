@@ -30,6 +30,7 @@ public class WebDriverThread {
         System.out.println("Current Browser Selection: " + selectedDriverType);
         System.out.println(" ");
         webDriver = selectedDriverType.getWebDriverObject();
+        System.out.println("instantiateWebDriver: " + webDriver);
         maximizeWindow(webDriver);
     }
 

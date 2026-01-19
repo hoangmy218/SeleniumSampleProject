@@ -1,6 +1,7 @@
 package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import objects.ApplicationProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -48,7 +49,7 @@ public enum DriverType implements DriverSetup {
         @Override
         public WebDriver getWebDriverObject() {
             ChromeOptions options = new ChromeOptions();
-
+            ApplicationProperties appInfo = DriverFactory.getApplicationInfo();
             String headless = System.getProperty("headless");
             //Set Window size
             options.addArguments("--window-size=1920,1080");
@@ -68,7 +69,8 @@ public enum DriverType implements DriverSetup {
             options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
             //for handling insecure downloads
             options.addArguments("--allow-running-insecure-content");
-            options.addArguments("--unsafely-treat-insecure-origin-as-secure=" + DriverFactory.credentials.get("url"));
+//            options.addArguments("--unsafely-treat-insecure-origin-as-secure=" + DriverFactory.credentials.get("url"));
+//            options.addArguments("--unsafely-treat-insecure-origin-as-secure=" + appInfo.url);
 
             //Chrome Preferences
             HashMap<String, Object> chromePreferences = new HashMap<String, Object>();

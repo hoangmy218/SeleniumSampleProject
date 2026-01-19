@@ -1,6 +1,7 @@
 package driver;
 
 import listeners.ScreenshotListener;
+import objects.ApplicationProperties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -16,20 +17,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-@Listeners(ScreenshotListener.class)
+
 public class DriverFactory {
 //    private static List<driver.WebDriverThread> threadList = new ArrayList<driver.WebDriverThread>();
     private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
     private static ThreadLocal<WebDriverThread> driverThread;
-    public static Properties credentials;
+    private static ThreadLocal<ApplicationProperties> credentials = ThreadLocal.withInitial(() -> null);
     public static int implicitWaitTimeInSeconds = 15;
 
 
-    //Load System Config from application.properties
+    //Load System Config from app-test-user.properties
     private static Properties loadSystemConfig() {
         try {
             Properties pr = new Properties();
-            pr.load(new FileInputStream("./src/test/resources/configures/application.properties"));
+            pr.load(new FileInputStream("./src/test/resources/configures/app-test-user.properties"));
             return pr;
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,17 +43,26 @@ public class DriverFactory {
 
         //get credential - system info from systemProperties
         String url = System.getProperty("url") != null ? System.getProperty("url") : property.getProperty("url");
-        String username = System.getProperty("username") != null ? System.getProperty("username") : property.getProperty("username");
+        String email = System.getProperty("email") != null ? System.getProperty("email") : property.getProperty("email");
         String password = System.getProperty("password") != null ? System.getProperty("password") : property.getProperty("password");
 
         if (!url.endsWith("/")) {
             url += "/";
         }
-        credentials = property;
+        credentials.set(new ApplicationProperties(url, email, password));
+    }
+
+    public static ApplicationProperties getApplicationInfo() {
+        System.out.println("Print TEST: " + credentials.get());
+        return credentials.get();
+    }
+
+    public static void clearCredentials() {
+        credentials.remove();
     }
 
     public static void loadConfig() {
-        setSystemCredentials();
+//        setSystemCredentials();
 
         String homeDir = System.getProperty("user.home");
         Path windowsDownloadPath = Paths.get(homeDir,"Downloads");
@@ -71,7 +81,7 @@ public class DriverFactory {
     }
 
 
-    @BeforeSuite
+//    @BeforeSuite
     public static void instantiateDriverObject() {
         loadConfig();
         driverThread = new ThreadLocal<WebDriverThread>() {
@@ -85,16 +95,16 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() throws Exception {
-        System.out.println("WebDriver: " + driverThread.get());
+        System.out.println("Print TEST WebDriver: " + driverThread.get().getDriver());
         return driverThread.get().getDriver();
     }
 
-    @AfterMethod
+//    @AfterMethod
     public static void clearCookies() throws Exception {
         getDriver().manage().deleteAllCookies();
     }
 
-    @AfterSuite
+//    @AfterSuite
     public static void closeDriverObjects() {
         for (WebDriverThread webDriverThread: webDriverThreadPool) {
             webDriverThread.quitDriver();
