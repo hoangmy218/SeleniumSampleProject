@@ -1,6 +1,9 @@
 # SeleniumSampleProject
 
 ##Test Execution
+Run mvn clean install to remove old target directories and force a fresh build.
+
+**> mvn clean install**
 
 To run tests in multiple threads:
 

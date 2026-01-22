@@ -21,6 +21,7 @@ import java.util.Properties;
 public class DriverFactory {
 //    private static List<driver.WebDriverThread> threadList = new ArrayList<driver.WebDriverThread>();
     private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
+//    private static ThreadLocal<WebDriverThread> driverThread = new ThreadLocal<>();
     private static ThreadLocal<WebDriverThread> driverThread;
     private static ThreadLocal<ApplicationProperties> credentials = ThreadLocal.withInitial(() -> null);
     public static int implicitWaitTimeInSeconds = 15;
@@ -53,7 +54,6 @@ public class DriverFactory {
     }
 
     public static ApplicationProperties getApplicationInfo() {
-        System.out.println("Print TEST: " + credentials.get());
         return credentials.get();
     }
 
@@ -80,10 +80,7 @@ public class DriverFactory {
         }
     }
 
-
-//    @BeforeSuite
     public static void instantiateDriverObject() {
-        loadConfig();
         driverThread = new ThreadLocal<WebDriverThread>() {
             @Override
             protected WebDriverThread initialValue() {
@@ -95,12 +92,19 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() throws Exception {
-        System.out.println("Print TEST WebDriver: " + driverThread.get().getDriver());
         return driverThread.get().getDriver();
+    }
+
+    public static WebDriver createDriver() throws Exception {
+        return driverThread.get().createDriver();
     }
 
 //    @AfterMethod
     public static void clearCookies() throws Exception {
+        System.out.println(
+                "[CLEAR COOKIES] Thread=" + Thread.currentThread().getId() +
+                        " DriverHash=" + System.identityHashCode(getDriver())
+        );
         getDriver().manage().deleteAllCookies();
     }
 

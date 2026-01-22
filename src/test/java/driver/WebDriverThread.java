@@ -17,6 +17,16 @@ public class WebDriverThread {
 
     public WebDriver getDriver() throws Exception {
         if (webDriver == null) {
+//            selectedDriverType = determineEffectiveDriveType();
+//            instantiateWebDriver();
+            throw new IllegalStateException(
+                    "DriverThread not initialized for current thread");
+        }
+        return webDriver;
+    }
+
+    public WebDriver createDriver() throws Exception {
+        if (webDriver == null) {
             selectedDriverType = determineEffectiveDriveType();
             instantiateWebDriver();
         }
@@ -30,7 +40,10 @@ public class WebDriverThread {
         System.out.println("Current Browser Selection: " + selectedDriverType);
         System.out.println(" ");
         webDriver = selectedDriverType.getWebDriverObject();
-        System.out.println("instantiateWebDriver: " + webDriver);
+        System.out.println(
+                "[WDT] CREATE DRIVER Thread=" + Thread.currentThread().getId() +
+                        " DriverHash=" + System.identityHashCode(webDriver)
+        );
         maximizeWindow(webDriver);
     }
 

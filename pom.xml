@@ -17,7 +17,7 @@
         <!-- Dependency version -->
         <selenium.version>4.38.0</selenium.version>
         <!-- Configurable variables -->
-        <threads>1</threads>
+        <threads>2</threads>
         <browser>chrome</browser>
     </properties>
 
@@ -39,13 +39,14 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>${threads}</threadCount>
-                    <systemProperties>
+                    <systemPropertyVariables>
                         <browser>${browser}</browser>
                         <screenshotDirectory>${project.build.directory}/screenshots</screenshotDirectory>
-                    </systemProperties>
+                    </systemPropertyVariables>
                     <includes>
                         <include>**/*.java</include>
                     </includes>
+                    <reportsDirectory>target/failsafe-reports</reportsDirectory>
                 </configuration>
                 <executions>
                     <execution>

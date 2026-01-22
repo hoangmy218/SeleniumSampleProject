@@ -21,26 +21,29 @@ public class LandingPage extends BasePage {
 
     public By searchBtn = By.id("submit_search");
 
-    public void goToProductPage(WebDriver driver) {
-        driver.get("https://automationexercise.com/products");
+    public WebElement getUserLink() {
+        return driver.findElement(userLink);
     }
 
-    public void searchProduct (String searchString, WebDriver driver) throws Exception {
+    public void goToProductPage() {
+        navigate("https://automationexercise.com/products");
+    }
 
-        goToProductPage(driver);
+    public void waitUntilUserLink(){
+        waitForElementToBeVisible(userLink);
+    }
+
+
+    public void searchProduct(String searchString) throws Exception {
+        goToProductPage();
         clearAndType(searchField, searchString);
-
-        System.out.println("URL is: " + driver.getCurrentUrl());
-
         WebElement searchButton = driver.findElement(searchBtn);
         searchButton.click();
-
         (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driverObject) {
                 return driverObject.getCurrentUrl().equalsIgnoreCase("https://automationexercise.com/products?search=" + searchString);
             }
         });
-
         System.out.println("URL is: " + driver.getCurrentUrl() + " should contains " + searchString.toLowerCase());
     }
 

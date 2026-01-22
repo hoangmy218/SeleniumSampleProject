@@ -12,14 +12,17 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.time.Duration;
 
-public class BasePage extends DriverFactory {
+//remove extend DriverFactory
+public abstract class  BasePage  {
 
-    protected WebDriver driver;
+    protected final WebDriver driver;
     public final int timeOut = DriverFactory.implicitWaitTimeInSeconds;
+    protected final WebDriverWait wait;
 
     public BasePage(WebDriver driver) throws IOException {
 //        super(driver);
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
     }
 
     public void navigate(String url) {
@@ -34,8 +37,12 @@ public class BasePage extends DriverFactory {
      */
     public boolean waitForElementToBeVisible(By element) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
-            System.out.println("Driver info: " + driver);
+            System.out.println(
+                    "[BasePAGE] W4E Thread=" + Thread.currentThread().getId() +
+                            " DriverHash=" + System.identityHashCode(driver)
+            );
+
+//            System.out.println("Driver Visible info: " + driver);
             wait.until(ExpectedConditions.visibilityOfElementLocated(element));
             return true;
         } catch (TimeoutException e) {
@@ -51,8 +58,9 @@ public class BasePage extends DriverFactory {
             isVisible = waitForElementToBeVisible(element);
             if (isVisible) {
                 WebElement searchField = driver.findElement(element);
-                System.out.println("Print TEST " +
-                        Thread.currentThread().getId() + " -> " + driver
+                System.out.println(
+                        "[BasePAGE] C&T Thread=" + Thread.currentThread().getId() +
+                                " DriverHash=" + System.identityHashCode(driver)
                 );
                 searchField.clear();
                 searchField.sendKeys(string);
