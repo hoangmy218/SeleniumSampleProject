@@ -20,14 +20,12 @@ public abstract class  BasePage  {
     protected final WebDriverWait wait;
 
     public BasePage(WebDriver driver) throws IOException {
-//        super(driver);
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
     }
 
     public void navigate(String url) {
         driver.get(url);
-        System.out.println("print TEST URL is: " + driver.getCurrentUrl());
     }
 
     /**
@@ -37,12 +35,6 @@ public abstract class  BasePage  {
      */
     public boolean waitForElementToBeVisible(By element) {
         try {
-            System.out.println(
-                    "[BasePAGE] W4E Thread=" + Thread.currentThread().getId() +
-                            " DriverHash=" + System.identityHashCode(driver)
-            );
-
-//            System.out.println("Driver Visible info: " + driver);
             wait.until(ExpectedConditions.visibilityOfElementLocated(element));
             return true;
         } catch (TimeoutException e) {
@@ -58,10 +50,6 @@ public abstract class  BasePage  {
             isVisible = waitForElementToBeVisible(element);
             if (isVisible) {
                 WebElement searchField = driver.findElement(element);
-                System.out.println(
-                        "[BasePAGE] C&T Thread=" + Thread.currentThread().getId() +
-                                " DriverHash=" + System.identityHashCode(driver)
-                );
                 searchField.clear();
                 searchField.sendKeys(string);
                 return true;

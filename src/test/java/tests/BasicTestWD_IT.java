@@ -14,14 +14,4 @@ public class BasicTestWD_IT extends BaseTest {
         pages().landingPage.searchProduct("Tshirt");
     }
 
-//    @Test
-//    public void searchForBlue() throws Exception {
-//        landingPage.searchProduct("Blue", driver);
-//    }
-//
-//    @Test
-//    public void searchForTshirt() throws Exception {
-//        landingPage.searchProduct("Tshirt", driver);
-//    }
-
 }

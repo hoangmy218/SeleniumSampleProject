@@ -19,9 +19,7 @@ import java.util.Properties;
 
 
 public class DriverFactory {
-//    private static List<driver.WebDriverThread> threadList = new ArrayList<driver.WebDriverThread>();
     private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
-//    private static ThreadLocal<WebDriverThread> driverThread = new ThreadLocal<>();
     private static ThreadLocal<WebDriverThread> driverThread;
     private static ThreadLocal<ApplicationProperties> credentials = ThreadLocal.withInitial(() -> null);
     public static int implicitWaitTimeInSeconds = 15;
@@ -99,27 +97,14 @@ public class DriverFactory {
         return driverThread.get().createDriver();
     }
 
-//    @AfterMethod
     public static void clearCookies() throws Exception {
-        System.out.println(
-                "[CLEAR COOKIES] Thread=" + Thread.currentThread().getId() +
-                        " DriverHash=" + System.identityHashCode(getDriver())
-        );
         getDriver().manage().deleteAllCookies();
     }
 
-//    @AfterSuite
     public static void closeDriverObjects() {
         for (WebDriverThread webDriverThread: webDriverThreadPool) {
             webDriverThread.quitDriver();
         }
     }
 
-//    public static WebDriver getDriver() {
-//        if (driver.get() == null) {
-//            WebDriverManager.chromedriver().setup();
-//            driver.set(new ChromeDriver());
-//        }
-//        return driver.get();
-//    }
 }
