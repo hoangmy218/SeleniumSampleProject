@@ -9,8 +9,8 @@ public class LoginTests_IT extends BaseTest {
     public void logInToTheWebsite() throws Exception {
         pages().loginPage.goToLoginPage();
         pages().loginPage.loginWithUsernameAndPassword(appInfo.email, appInfo.password);
-        pages().landingPage.waitUntilUserLink();
-        String userLinkText = pages().landingPage.getUserLink().getText().trim();
+        pages().landingPage.header.waitUntilUserLink();
+        String userLinkText = pages().landingPage.header.getUserLinkText();
         Assert.assertEquals(userLinkText, "Logged in as My");
     }
 
@@ -18,9 +18,8 @@ public class LoginTests_IT extends BaseTest {
     public void logInToTheWebsite3() throws Exception {
         pages().loginPage.goToLoginPage();
         pages().loginPage.loginWithUsernameAndPassword(appInfo.email, appInfo.password);
-        pages().landingPage.waitForElementToBeVisible(pages().landingPage.userLink);
-        pages().landingPage.waitUntilUserLink();
-        String userLinkText = pages().landingPage.getUserLink().getText().trim();
+        pages().landingPage.waitForElementToBeVisible(pages().landingPage.header.getUserLink());
+        String userLinkText = pages().landingPage.header.getUserLinkText();
         Assert.assertEquals(userLinkText, "Logged in as My");
     }
 

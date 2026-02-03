@@ -11,13 +11,13 @@ public class Pages {
     public final LoginPage loginPage;
     public final LandingPage landingPage;
 
-    public Pages(WebDriver driver) throws IOException {
+    public Pages(WebDriver driver) throws Exception {
         this.driver = driver;
         this.loginPage = new LoginPage(driver);
         this.landingPage = new LandingPage(driver);
     }
 
-    public static void init(WebDriver driver) throws IOException {
+    public static void init(WebDriver driver) throws Exception {
         PagesThread.set(new Pages(driver));
     }
 

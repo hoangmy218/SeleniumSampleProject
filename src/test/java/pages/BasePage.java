@@ -33,9 +33,9 @@ public abstract class  BasePage  {
      * @param element element to be visible
      * @return true if element is visible else throws TimeoutException
      */
-    public boolean waitForElementToBeVisible(By element) {
+    public boolean waitForElementToBeVisible(WebElement element) {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+            wait.until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (TimeoutException e) {
             System.out.println("Element is not visible: " + element);
@@ -44,14 +44,13 @@ public abstract class  BasePage  {
         }
     }
 
-    public boolean clearAndType(By element, String string) {
+    public boolean clearAndType(WebElement element, String string) {
         boolean isVisible = false;
         try {
             isVisible = waitForElementToBeVisible(element);
             if (isVisible) {
-                WebElement searchField = driver.findElement(element);
-                searchField.clear();
-                searchField.sendKeys(string);
+                element.clear();
+                element.sendKeys(string);
                 return true;
             } else {
                 System.out.println("Element is visible");

@@ -63,6 +63,9 @@ public enum DriverType implements DriverSetup {
             options.addArguments("--no-default-browser-check");
             //Disable extension
             options.addArguments("chrome.switches", "--disable-extensions");
+            //Prevent Ad Notifications
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-blink-features=AutomationControlled");
             //Disable install other chrome extensions
             options.setExperimentalOption("useAutomationExtension", false);
             //hide automation traces ("Chrome is being controlled by automated test software" message)

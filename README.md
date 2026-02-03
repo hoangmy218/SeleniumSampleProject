@@ -11,7 +11,7 @@ To run tests in multiple threads:
 
 To run tests with specific browser (for firefox, use -Dbrowser=firefox), available driver setup: chrome (Default), firefox, edge, safari 
 
-**> mvn clean install -Dthreads=2 -Dbrowser=firefox**
+**> mvn clean verify -Dthreads=2 -Dbrowser=firefox**
 
 To run tests in headless mode:
 
