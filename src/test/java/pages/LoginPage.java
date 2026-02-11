@@ -34,6 +34,20 @@ public class LoginPage extends BasePage {
         loginBtn.click();
     }
 
+    public LoginPage enterEmail(String email) {
+        emailAddressField.sendKeys(email);
+        return this;
+    }
+
+    public LoginPage enterPassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
+    }
+
+    public void clickLoginBtn() {
+        loginBtn.click();
+    }
+
     public void goToLoginPage() {
         navigate("https://automationexercise.com/login");
     }

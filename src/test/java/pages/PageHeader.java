@@ -6,6 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 
 public class PageHeader extends BasePage{
 
@@ -24,16 +31,36 @@ public class PageHeader extends BasePage{
     }
 
     public void goToProductPage() {
-        productLink.click();
+//        productLink.click();
+        clickElement(productLink);
         blockAds();
+        //After remove Ads, the actually still not be navigate to Product Page.
+        //So we should click again
+        clickElement(productLink);
     }
 
+    public void clickElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    public LoginPage goToLoginPage() throws IOException {
+//        loginLink.click();
+        clickElement(loginLink);
+        return new LoginPage(driver);
+    }
+    
+    @FindBy(xpath = "//*[contains(@class,'adsbygoogle') and contains(@class,'adsbygoogle-noablate')]")
+    private List<WebElement> googleAds;
+
     public void blockAds() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         //blocking ads
-        js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove()");
-        js.executeScript("window.scrollBy(0,350)");
-        System.out.println("Blocked Ads");
+        if (googleAds.size() > 0) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove()");
+            js.executeScript("window.scrollBy(0,350)");
+            System.out.println("Blocked Ads");
+        }
     }
 
     public String getUserLinkText() {

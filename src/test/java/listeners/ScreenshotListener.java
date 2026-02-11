@@ -49,6 +49,7 @@ public class ScreenshotListener extends TestListenerAdapter {
                     writeScreenshotToFile(new Augmenter().augment(driver), screenshot);
                 }
                 System.out.println("Written screenshot to " + screenshotAbsolutePath);
+                System.out.println("Test Failed at page: " + driver.getCurrentUrl());
             } else {
                 System.out.println("Unable to create " + screenshotAbsolutePath);
             }

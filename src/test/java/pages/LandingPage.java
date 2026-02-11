@@ -26,11 +26,6 @@ public class LandingPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-
-//    public PageFooter footer = new PageFooter(driver);
-
-
-
     @FindBy(name = "search")
     private WebElement searchField;
     
@@ -43,22 +38,9 @@ public class LandingPage extends BasePage {
     @FindBy(xpath = "//a[@href='/products']")
     private WebElement productItem;
 
-//    public By userLink = By.xpath("//i[contains(@class,'fa-user')]/parent::a");
-//
-//    public By searchField = By.name("search");
-//
-//    public By searchBtn = By.id("submit_search");
-//
-//    public void goToProductPage() {
-//        header.goToProductPage();
-//        isCurrentURLCorrect("https://automationexercise.com/products");
-//    }
-
-
     public void searchProduct(String searchString) throws Exception {
         header.goToProductPage();
-//        goToProductPage();
-        isCurrentURLCorrect("https://automationexercise.com/products");
+        Assert.assertEquals(isCurrentURLCorrect("https://automationexercise.com/products"), true);
         clearAndType(searchField, searchString);
         searchBtn.click();
         (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
@@ -66,21 +48,19 @@ public class LandingPage extends BasePage {
                 return driverObject.getCurrentUrl().equalsIgnoreCase("https://automationexercise.com/products?search=" + searchString);
             }
         });
-        System.out.println("URL is: " + driver.getCurrentUrl() + " should contains " + searchString.toLowerCase());
+//        System.out.println("URL is: " + driver.getCurrentUrl() + " should contains " + searchString.toLowerCase());
     }
 
     public boolean isCurrentURLCorrect(String url) {
-//        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver driverObject) {
-//                return driverObject.getCurrentUrl().equalsIgnoreCase(url);
-//            }
-//        });
-        System.out.println("URL is: " + driver.getCurrentUrl() + " should equal " + url);
-        return driver.getCurrentUrl() == url;
-    }
-
-    public boolean sliderIsDisplayed() {
-        return slider.size() == 1;
+        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driverObject) {
+                return driverObject.getCurrentUrl().equalsIgnoreCase(url);
+            }
+        });
+        String currentUrl =  driver.getCurrentUrl();
+        Boolean isCurrentURL = currentUrl.equalsIgnoreCase(url);
+//        System.out.println("URL is: " + currentUrl + " should equal " + url + " " + isCurrentURL);
+        return isCurrentURL;
     }
 
     public void goToLandingPage() {
@@ -88,8 +68,15 @@ public class LandingPage extends BasePage {
         navigate(domain);
         //System.out.println("Page GTLP Thread: " + Thread.currentThread().getName() + " | Driver: " + driver.hashCode());
         System.out.println("domain: " + domain);
+        Assert.assertEquals(isCurrentURLCorrect("https://automationexercise.com/"), true);
     }
 
+    //Verify slider exist in DOM, not throw exception if not
+    public boolean sliderIsDisplayed() {
+        return slider.size() == 1;
+    }
+
+    //Verify search field display on UI, throw exception if element not exist in DOM
     public boolean searchFieldIsDisplayed() {
         return searchField.isDisplayed();
     }
