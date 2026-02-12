@@ -44,8 +44,21 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public void clickLoginBtn() {
+
+    public LoginPage andFailLogin() {
         loginBtn.click();
+        return this;
+    }
+
+    public LandingPage andSuccessfullyLogin() throws Exception {
+        loginBtn.click();
+        return new LandingPage(driver);
+    }
+
+    public String getValidationMessageOfPasswordField() {
+        String valMsg = getValidationMessageOfField(passwordField);
+        System.out.println("validation message: " + valMsg);
+        return valMsg;
     }
 
     public void goToLoginPage() {

@@ -26,7 +26,15 @@ public class BasicTestWD_IT extends BaseTest {
 //        pages().landingPage.isCurrentURLCorrect("https://automationexercise.com/");
         pages().landingPage.header.goToProductPage();
         Assert.assertEquals(pages().landingPage.searchFieldIsDisplayed(), true);
+    }
 
+    @Test
+    public void checkHoverOverProductItemAndNavigateToProductDetailsPage() {
+        pages().landingPage.goToLandingPage();
+        pages().landingPage.hoverProductItem(0)
+                .verifyProductOverlayInfo("Blue Top", "Rs. 500")
+                .clickAddToCartWhiteBtn(0)
+                .verifyAddToCartSuccess("Your product has been added to cart.");
     }
 
 }

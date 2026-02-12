@@ -61,6 +61,15 @@ public abstract class  BasePage  {
         return false;
     }
 
+    public String getValidationMessageOfField(WebElement field) {
+        return field.getAttribute("validationMessage");
+    }
+
+    public void clickElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
 
 
 }

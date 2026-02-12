@@ -31,7 +31,6 @@ public class PageHeader extends BasePage{
     }
 
     public void goToProductPage() {
-//        productLink.click();
         clickElement(productLink);
         blockAds();
         //After remove Ads, the actually still not be navigate to Product Page.
@@ -39,13 +38,9 @@ public class PageHeader extends BasePage{
         clickElement(productLink);
     }
 
-    public void clickElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-    }
+
 
     public LoginPage goToLoginPage() throws IOException {
-//        loginLink.click();
         clickElement(loginLink);
         return new LoginPage(driver);
     }
