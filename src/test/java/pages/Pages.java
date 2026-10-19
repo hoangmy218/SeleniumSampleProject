@@ -1,0 +1,35 @@
+package pages;
+
+import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
+
+public class Pages {
+
+    private static final ThreadLocal<Pages> PagesThread = new ThreadLocal<>();
+    protected final WebDriver driver;
+    public final LoginPage loginPage;
+    public final LandingPage landingPage;
+    public final PaymentPage paymentPage;
+
+    public Pages(WebDriver driver) throws Exception {
+        this.driver = driver;
+        this.loginPage = new LoginPage(driver);
+        this.landingPage = new LandingPage(driver);
+        this.paymentPage = new PaymentPage(driver);
+    }
+
+    public static void init(WebDriver driver) throws Exception {
+        PagesThread.set(new Pages(driver));
+    }
+
+    public static Pages get() {
+        Pages pages = PagesThread.get();
+        return pages;
+    }
+
+    public static void cleanup() {
+        PagesThread.remove();
+    }
+
+}

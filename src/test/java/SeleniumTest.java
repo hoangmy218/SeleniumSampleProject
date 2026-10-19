@@ -1,0 +1,35 @@
+//import tests.BaseTest;
+//
+//public class SeleniumTest extends BaseTest {
+//
+//    public SeleniumTest() throws Exception {
+//        super();
+//    }
+//
+//    public void navigateToDashboardPage() {
+//        driver.get("https://automationexercise.com/");
+//    }
+//
+////    public static void main(String[] args) throws IOException {
+////        SeleniumTest test = new SeleniumTest();
+////        test.navigateToDashboardPage();
+////    }
+//
+////    @BeforeTest
+////    static void setup() throws IOException{
+////        SeleniumTest test = new SeleniumTest();
+////    }
+////
+////    @AfterTest
+////    void teardown() {
+////        driver.quit();
+////    }
+////
+////    @Test
+////    void test() {
+////        navigateToDashboardPage();
+////        String title = driver.getTitle();
+////        // Verify
+////        assert(title).contains("Automation Exercise");
+////    }
+//}
