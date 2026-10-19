@@ -1,5 +1,8 @@
 package listeners;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.AttachmentOptions;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +10,7 @@ import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,9 +40,20 @@ public class ScreenshotListener extends TestListenerAdapter {
     }
 
     @Override
+    @Attachment(type = "image/png")
     public void onTestFailure(ITestResult failingTest) {
         try {
             WebDriver driver = getDriver();
+            // 1. Capture screenshot bytes
+            byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+
+            // 2. ATTACH TO ALLURE REPORT (This is what was missing)
+            Allure.attachment(
+                    "Screenshot on Failure - " + failingTest.getName(),
+                    "image/png",
+                    new ByteArrayInputStream(screenshotBytes),
+                    AttachmentOptions.withFileExtension(".png")
+            );
             String screenshotDirectory = System.getProperty("screenshotDirectory");
             String screenshotAbsolutePath = screenshotDirectory + File.separator + System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
             File screenshot = new File(screenshotAbsolutePath);

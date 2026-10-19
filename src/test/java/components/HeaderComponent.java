@@ -1,4 +1,4 @@
-package pages;
+package components;
 
 import driver.DriverFactory;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,12 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
+import pages.LoginPage;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
-public class PageHeader extends BasePage{
+public class HeaderComponent extends BasePage {
 
     @FindBy(xpath = "//a[@href='/products']")
     private WebElement productLink;
@@ -25,7 +27,7 @@ public class PageHeader extends BasePage{
     @FindBy(xpath = "//i[contains(@class, 'fa-user')]/parent::a")
     private WebElement userLink;
 
-    public PageHeader(WebDriver driver) throws Exception {
+    public HeaderComponent(WebDriver driver) throws Exception {
         super(driver);
         PageFactory.initElements(driver, this);
     }

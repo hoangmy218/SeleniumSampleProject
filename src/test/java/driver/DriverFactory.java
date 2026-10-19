@@ -22,7 +22,9 @@ public class DriverFactory {
     private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
     private static ThreadLocal<WebDriverThread> driverThread;
     private static ThreadLocal<ApplicationProperties> credentials = ThreadLocal.withInitial(() -> null);
-    public static int implicitWaitTimeInSeconds = 15;
+    public static int SHORT_WAIT = 5;
+    public static int DEFAULT_WAIT = 10;
+    public static int LONG_WAIT = 30;
 
 
     //Load System Config from app-test-user.properties

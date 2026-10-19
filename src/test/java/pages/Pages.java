@@ -10,11 +10,13 @@ public class Pages {
     protected final WebDriver driver;
     public final LoginPage loginPage;
     public final LandingPage landingPage;
+    public final PaymentPage paymentPage;
 
     public Pages(WebDriver driver) throws Exception {
         this.driver = driver;
         this.loginPage = new LoginPage(driver);
         this.landingPage = new LandingPage(driver);
+        this.paymentPage = new PaymentPage(driver);
     }
 
     public static void init(WebDriver driver) throws Exception {

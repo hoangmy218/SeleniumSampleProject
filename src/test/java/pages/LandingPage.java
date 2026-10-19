@@ -1,26 +1,28 @@
 package pages;
 
+import components.HeaderComponent;
 import driver.DriverFactory;
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.asserts.Assertion;
 
-import java.time.Duration;
 import java.util.List;
 
 public class LandingPage extends BasePage {
 
-    public final PageHeader header;
+    public final HeaderComponent header;
 
     public LandingPage(WebDriver driver) throws Exception {
         super(driver);
-        header = new PageHeader(driver);
+        header = new HeaderComponent(driver);
         //Debug
 //        System.out.println("Landing Page Thread: " + Thread.currentThread().getName() + " | Driver: " + driver.hashCode());
         PageFactory.initElements(driver, this);
@@ -40,6 +42,9 @@ public class LandingPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='single-products']")
     private List<WebElement> productItems;
+
+    @FindBy(css = ".single-products")
+    private WebElement firstProductItem;
     
     @FindBy(xpath = "//div[@class='product-overlay']")
     private List<WebElement> productOverlayItems;
@@ -49,6 +54,9 @@ public class LandingPage extends BasePage {
     
     @FindBy(xpath = "//div[@class=\"overlay-content\"]//p")
     private List<WebElement> productNamesOnProductOverlayItems;
+
+    @FindBy(xpath = "(//div[@class='overlay-content']//p)[1]")
+    private  WebElement firstProduct;
     
     @FindBy(xpath = "//div[@class=\"overlay-content\"]/h2")
     private List<WebElement> productPriceOnProductOverlayItems;
@@ -56,37 +64,34 @@ public class LandingPage extends BasePage {
     @FindBy(xpath = "//div[@id=\"cartModal\"]//p[@class=\"text-center\"][1]")
     private WebElement cartContent;
 
+    @Step("Search for product with keyword {0}")
     public void searchProduct(String searchString) throws Exception {
         header.goToProductPage();
-        Assert.assertEquals(isCurrentURLCorrect("https://automationexercise.com/products"), true);
+        waitForURLChangesToIncludeTargetPath("/products");
         clearAndType(searchField, searchString);
         searchBtn.click();
-        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driverObject) {
-                return driverObject.getCurrentUrl().equalsIgnoreCase("https://automationexercise.com/products?search=" + searchString);
-            }
-        });
-//        System.out.println("URL is: " + driver.getCurrentUrl() + " should contains " + searchString.toLowerCase());
+        //Wait until URL has change
+        waitForURLChangesToIncludeTargetPath(searchString);
     }
 
     public boolean isCurrentURLCorrect(String url) {
-        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driverObject) {
-                return driverObject.getCurrentUrl().equalsIgnoreCase(url);
-            }
-        });
+//        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(new ExpectedCondition<Boolean>() {
+//            public Boolean apply(WebDriver driverObject) {
+//                return driverObject.getCurrentUrl().equalsIgnoreCase(url);
+//            }
+//        });
         String currentUrl =  driver.getCurrentUrl();
         Boolean isCurrentURL = currentUrl.equalsIgnoreCase(url);
 //        System.out.println("URL is: " + currentUrl + " should equal " + url + " " + isCurrentURL);
         return isCurrentURL;
     }
 
+    @Step("Go to Landing Page")
     public void goToLandingPage() {
         String domain = DriverFactory.getApplicationInfo().url;
         navigate(domain);
         //System.out.println("Page GTLP Thread: " + Thread.currentThread().getName() + " | Driver: " + driver.hashCode());
         System.out.println("domain: " + domain);
-        Assert.assertEquals(isCurrentURLCorrect("https://automationexercise.com/"), true);
     }
 
     //Verify slider exist in DOM, not throw exception if not
@@ -99,20 +104,53 @@ public class LandingPage extends BasePage {
         return searchField.isDisplayed();
     }
     
-    public WebElement getFirstProductItem() {
-        return productItems.get(0);
+    public WebElement getProductItem(int no) {
+//        wait.until(ExpectedConditions.visibilityOfAllElements(productItems));
+        waitForAllElementToBeVisible(productItems);
+        return productItems.get(no);
     }
     
     public LandingPage hoverProductItem(int no) {
         Actions advancedActions = new Actions(driver);
-        advancedActions.moveToElement(productItems.get(no)).perform();
+        advancedActions.moveToElement(getProductItem(no)).perform();
+
         return this;
     }
 
+    public LandingPage hoverOnFirstProductItem() {
+        Actions advancedActions = new Actions(driver);
+        advancedActions.moveToElement(firstProductItem).perform();
+
+        return this;
+    }
+
+    public LandingPage scrollToFirstProduct(int no) {
+        new Actions(driver).scrollToElement(getProductItem(no)).perform();
+        //        // 2. Scroll element into the center of the viewport (prevents sticky headers from obscuring it)
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", getProductItem(no));
+        return this;
+    }
+
+    public LandingPage scrollToAddToCartButton(int no) {
+//        new Actions(driver).scrollToElement(getProductItem(no)).perform();
+        //        // 2. Scroll element into the center of the viewport (prevents sticky headers from obscuring it)
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", getAddToCartWhiteBtn(no));
+        return this;
+    }
+
+
+    private final By firstOverlayProductName = By.xpath("(//div[@class='overlay-content']//p)[1]");
+
     public LandingPage verifyProductOverlayInfo(String productName, String productPrice) {
-        WebElement actualProName = productNamesOnProductOverlayItems.get(0);
-        waitForElementToBeVisible(actualProName);
-        Assert.assertEquals(actualProName.getText(), productName);
+        // 1. Wait until at least one element in the list is visible
+//        wait = WebDriverWait(driver,15,5)
+//        wait.until(ExpectedConditions.vis(productNamesOnProductOverlayItems));
+
+
+//        System.out.println("productNamesOnProductOverlayItems[0]: " + firstOverlayProductName );
+        waitForElementLocatedToBeVisible(firstOverlayProductName);
+        WebElement firstProductOverlay = productNamesOnProductOverlayItems.get(0);
+        Assert.assertEquals(firstProductOverlay.getText(), productName);
         WebElement actualProductPrice = productPriceOnProductOverlayItems.get(0);
         waitForElementToBeVisible(actualProductPrice);
         Assert.assertEquals(actualProductPrice.getText(), productPrice);
@@ -131,10 +169,26 @@ public class LandingPage extends BasePage {
         return this;
     }
 
+    public String getMessageOnPopup() {
+        waitForElementToBeVisible(cartContent);
+        return cartContent.getText();
+    }
+
+    @Step("Check URL contain Keyword")
+    public boolean hasSearchKeywordInUrl(String keyword) {
+        if (keyword ==null || keyword.isEmpty()) {
+            return false;
+        }
+        String currentUrl =  driver.getCurrentUrl();
+        return currentUrl != null && currentUrl.equalsIgnoreCase("https://automationexercise.com/products?search=" + keyword);
+    }
+
 
     public WebElement getAddToCartWhiteBtn(int no) {
         return addToCartWhiteBtn.get(no);
     }
+
+
 
 
 

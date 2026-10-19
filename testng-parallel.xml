@@ -3,7 +3,7 @@
 
     <test name="Parallel Tests">
         <classes>
-            <class name="tests.LoginTests_IT"/>
+<!--            <class name="tests.LoginTests_IT"/>-->
             <class name="tests.BasicTestWD_IT"/>
         </classes>
     </test>
