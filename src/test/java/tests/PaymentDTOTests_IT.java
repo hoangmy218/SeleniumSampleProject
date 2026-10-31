@@ -38,7 +38,7 @@ public class PaymentDTOTests_IT extends BaseTest{
         pages().paymentPage.fillPaymentForm(paymentData)
                 .submitPayment();
         Allure.step("Verify display 'Order Placed!' Text when payment done", () -> {
-            Assert.assertTrue(pages().paymentPage.isPaymentDone(), "User order placed successfully!");
+            Assert.assertEquals(pages().paymentPage.getTextOnPaymentPopup(), "ORDER PLACED!");
         });
     }
 }

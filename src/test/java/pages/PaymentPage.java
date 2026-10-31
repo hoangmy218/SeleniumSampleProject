@@ -41,17 +41,22 @@ public class PaymentPage extends BasePage{
         return this;
     }
 
+    @Step("Fill Payment Form with blank field")
+    public PaymentPage fillPaymentFormWithBlankField(PaymentModel paymentFormData) {
+        //Delegate work to each component using data from the DTO
+        cardDetailsForm.fillCardFormWithBlankField(paymentFormData.getCard());
+        return this;
+    }
+
     @Step("Submit Payment Form")
     public PaymentPage submitPayment() {
         clickElement(payBtn);
         return this;
     }
 
-    public boolean isPaymentDone() {
+    public String getTextOnPaymentPopup() {
         waitForElementToBeVisible(orderPlacedTxt);
-        if (orderPlacedTxt != null && orderPlacedTxt.getText().equalsIgnoreCase("Order Placed!"))
-            return true;
-        return false;
+        return orderPlacedTxt.getText();
     }
 
 

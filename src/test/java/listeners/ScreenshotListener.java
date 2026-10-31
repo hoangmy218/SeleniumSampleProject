@@ -33,9 +33,13 @@ public class ScreenshotListener extends TestListenerAdapter {
         return fileCreated;
     }
 
-    private void writeScreenshotToFile(WebDriver driver, File screenshot) throws IOException {
+    private byte[] makeScreenshotOnFailure(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    private void writeScreenshotToFile(WebDriver driver, File screenshot, byte[] screenshotBytes) throws IOException {
         FileOutputStream screenshotStream = new FileOutputStream(screenshot);
-        screenshotStream.write(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+        screenshotStream.write(screenshotBytes);
         screenshotStream.close();
     }
 
@@ -44,24 +48,25 @@ public class ScreenshotListener extends TestListenerAdapter {
     public void onTestFailure(ITestResult failingTest) {
         try {
             WebDriver driver = getDriver();
-            // 1. Capture screenshot bytes
-            byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-            // 2. ATTACH TO ALLURE REPORT (This is what was missing)
-            Allure.attachment(
-                    "Screenshot on Failure - " + failingTest.getName(),
-                    "image/png",
-                    new ByteArrayInputStream(screenshotBytes),
-                    AttachmentOptions.withFileExtension(".png")
-            );
             String screenshotDirectory = System.getProperty("screenshotDirectory");
-            String screenshotAbsolutePath = screenshotDirectory + File.separator + System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
+            String screenshotAbsolutePath = screenshotDirectory + File.separator + System.currentTimeMillis()
+                    + "_" + failingTest.getName() + ".png";
             File screenshot = new File(screenshotAbsolutePath);
             if (createFile(screenshot)) {
+                //Capture screenshot bytes
+                byte[] screenshotBytes = makeScreenshotOnFailure(driver);
                 try {
-                    writeScreenshotToFile(driver, screenshot);
+                    //ATTACH TO ALLURE REPORT (This is what was missing)
+                    Allure.attachment(
+                            "Screenshot on Failure - " + failingTest.getName(),
+                            "image/png",
+                            new ByteArrayInputStream(screenshotBytes),
+                            AttachmentOptions.withFileExtension(".png")
+                    );
+                    writeScreenshotToFile(driver, screenshot, screenshotBytes);
                 } catch (ClassCastException weNeedToAugmentOurDriverObject) {
-                    writeScreenshotToFile(new Augmenter().augment(driver), screenshot);
+                    writeScreenshotToFile(new Augmenter().augment(driver), screenshot, screenshotBytes);
                 }
                 System.out.println("Written screenshot to " + screenshotAbsolutePath);
                 System.out.println("Test Failed at page: " + driver.getCurrentUrl());

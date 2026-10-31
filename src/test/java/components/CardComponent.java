@@ -38,4 +38,28 @@ public class CardComponent extends BasePage {
         cardExpMonth.sendKeys(cardForm.getExpiryMonth().toString());
         cardExpYear.sendKeys(cardForm.getExpiryYear().toString());
     }
+
+    @Step("Fill Card Form {0} AND Leave field blank if missing data")
+    public void fillCardFormWithBlankField(CardModel cardForm) {
+        cardNameField.sendKeys(cardForm.getCardName());
+        cardNumberField.sendKeys(cardForm.getCardNumber());
+        String cardCVCStr = (cardForm.getCardCVC() != null) ? String.valueOf(cardForm.getCardCVC()) : "";
+        cardCVCField.sendKeys(cardCVCStr);
+        String cardExpMonthStr = (cardForm.getExpiryMonth() != null) ? String.valueOf(cardForm.getExpiryMonth()) : "";
+        cardExpMonth.sendKeys(cardExpMonthStr);
+        String cardExpYearStr = (cardForm.getExpiryYear() != null) ? String.valueOf(cardForm.getExpiryYear()) : "";
+        cardExpYear.sendKeys(cardExpYearStr);
+    }
+
+    public String getCardNameValidationMessage() {
+        return cardNameField.getAttribute("validationMessage");
+    }
+
+    public String getCardNumberValidationMessage() {
+        return cardNumberField.getAttribute("validationMessage");
+    }
+
+    public String getCardCVCValidationMessage() {
+        return cardCVCField.getAttribute("validationMessage");
+    }
 }

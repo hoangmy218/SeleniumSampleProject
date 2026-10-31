@@ -19,10 +19,16 @@
         <!-- Configurable variables -->
         <threads>2</threads>
         <browser>chrome</browser>
-        <allure.version>3.0.0</allure.version>
-        <allureMaven.version>2.10.0</allureMaven.version>
-        <allureReport.version>2.29.0</allureReport.version>
+        <slf4j-api.version>2.0.17</slf4j-api.version>
+        <slf4j-simple.version>2.0.17</slf4j-simple.version>
+        <webdrivermanager.version>6.3.3</webdrivermanager.version>
+        <testng.version>7.11.0</testng.version>
+        <allureTestNG.version>3.0.0</allureTestNG.version>
+        <allureMaven.version>3.1.0</allureMaven.version>
+        <allureReport.version>3.19.1</allureReport.version>
+        <allureJavaCommon.version>3.0.0</allureJavaCommon.version>
         <aspectj.version>1.9.25</aspectj.version>
+        <maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
     </properties>
 
     <build>
@@ -39,7 +45,7 @@
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.5.4</version>
+                <version>${maven-failsafe-plugin.version}</version>
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>${threads}</threadCount>
@@ -52,9 +58,12 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <includes>
-                        <include>**/PaymentDTOTests_IT.java</include>
+                        <include>**/PaymentAllureReportTests_IT.java</include>
                     </includes>
-                    <reportsDirectory>target/failsafe-reports</reportsDirectory>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng-parameters-allure.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <reportsDirectory>${project.build.directory}/failsafe-reports</reportsDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -72,6 +81,7 @@
                 <configuration>
                     <reportVersion>${allureReport.version}</reportVersion>
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <configPath>./allure3.js</configPath>
                 </configuration>
                 <executions>
                     <execution>
@@ -86,25 +96,12 @@
         </plugins>
     </build>
 
-    <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-bom</artifactId>
-                <version>${allure.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.11.0</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -119,21 +116,21 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>6.3.3</version>
+            <version>${webdrivermanager.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.17</version>
+            <version>${slf4j-api.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.17</version>
+            <version>${slf4j-simple.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -141,7 +138,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>${allure.version}</version>
+            <version>${allureTestNG.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -152,6 +149,16 @@
             <version>${aspectj.version}</version>
         </dependency>
 
+        <!-- Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-java-commons -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allureJavaCommon.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
+    <!-- Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+
 
 </project>

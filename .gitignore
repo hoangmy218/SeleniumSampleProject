@@ -4,6 +4,12 @@
 # Log file
 *.log
 
+#History report file
+history.jsonl
+
+#Report config
+known-issues.json
+
 # BlueJ files
 *.ctxt
 
@@ -23,3 +29,4 @@
 hs_err_pid*
 replay_pid*
 target/
+.allure/
