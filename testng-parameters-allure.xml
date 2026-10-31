@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Payment Suite" parallel="methods" thread-count="1">
+
+    <test name="Payment - Allure Report Tests">
+        <parameter name="CardName" value="Elly Han"></parameter>
+        <parameter name="CardNumber" value="1023456789"></parameter>
+        <classes>
+            <class name="tests.PaymentAllureReportTests_IT"/>
+        </classes>
+    </test>
+
+</suite>
