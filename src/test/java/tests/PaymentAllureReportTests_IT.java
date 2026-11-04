@@ -36,6 +36,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Issue("AT-100")
     @TmsLink("AT-TR-50")
     public void verifyOrderPlaceSuccessWithValidCard(String testCaseId, PaymentModel paymentData) {
+        Allure.label("layer", "integration");
         Allure.label("parentSuite", "Tests for Integration");
         Allure.suite("Tests for payment feature");
         Allure.label("subSuite", "Tests for main flows - happy cases");
@@ -61,6 +62,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Issue("AT-101")
     @TmsLink("AT-TR-51")
     public void verifyValidationMessageOnCardNameField() {
+        Allure.label("layer", "unit");
         PaymentModel missingCardNameForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
         missingCardNameForm.getCard().setCardName("");
 
@@ -83,6 +85,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Issue("AT-102")
     @TmsLink("AT-TR-52")
     public void verifyValidationMessageOnCardNumberField() {
+        Allure.label("layer", "unit");
         PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
         missingCardNumberForm.getCard().setCardNumber("");
 
@@ -106,6 +109,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @TmsLink("AT-TR-53")
     @Parameters({"CardName", "CardNumber"}) //Global parameters for every test inside block <test> in testng-parameters-allure.xml
     public void verifyValidationMessageOnCardCVCField(String cardName, String cardNumber) {
+        Allure.label("layer", "unit");
 //        PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
 //        missingCardNumberForm.getCard().setCardNumber("");
 
