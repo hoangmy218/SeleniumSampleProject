@@ -24,9 +24,9 @@ public class PaymentAllureReportTests_IT extends BaseTest {
         ObjectMapper mapper = new ObjectMapper();
         PaymentModel[] validPaymentArray = mapper.readValue(jsonFile, PaymentModel[].class);
 
-        return new Object[][] {
-                { "TC_PM_04: Valid card - Expiring late", validPaymentArray[0]},
-                { "TC_PM_05: Valid card - Expiring soon", validPaymentArray[1]}
+        return new Object[][]{
+                {"TC_PM_04: Valid card - Expiring late", validPaymentArray[0]},
+                {"TC_PM_05: Valid card - Expiring soon", validPaymentArray[1]}
         };
     }
 
@@ -109,7 +109,8 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Link(name = "Website", url = "https://dev.example.com/")
     @Issue("AT-103")
     @TmsLink("AT-TR-53")
-    @Parameters({"CardName", "CardNumber"}) //Global parameters for every test inside block <test> in testng-parameters-allure.xml
+    @Parameters({"CardName", "CardNumber"})
+    //Global parameters for every test inside block <test> in testng-parameters-allure.xml
     public void verifyValidationMessageOnCardCVCField(String cardName, String cardNumber) {
         Allure.label("layer", "unit");
         boolean skipCondition = true; // Change this to false to see the test execute
@@ -147,25 +148,25 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Link(name = "Website", url = "https://dev.example.com/")
     @Issue("AT-104")
     @TmsLink("AT-TR-54")
+    @Parameters({"CardName", "CardNumber"})
     public void verifyValidationMessageOnCardExpMonthField(String cardName, String cardNumber) {
-            Allure.label("layer", "unit");
+        Allure.label("layer", "unit");
 
-            CardModel cardModel = new CardModel();
-            cardModel.setCardName(cardName);
-            cardModel.setCardNumber(cardNumber);
-            cardModel.setCardCVC(123);
-            PaymentModel paymentModel = new PaymentModel();
-            paymentModel.setCard(cardModel);
+        CardModel cardModel = new CardModel();
+        cardModel.setCardName(cardName);
+        cardModel.setCardNumber(cardNumber);
+        cardModel.setCardCVC(123);
+        PaymentModel paymentModel = new PaymentModel();
+        paymentModel.setCard(cardModel);
 
-            pages().paymentPage.goToPaymentPage();
-            pages().paymentPage.fillPaymentFormWithBlankField(paymentModel)
-                    .submitPayment();
-            Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
-                Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardExpMonthValidationMessage(), "Please fill out this field.");
-            });
+        pages().paymentPage.goToPaymentPage();
+        pages().paymentPage.fillPaymentFormWithBlankField(paymentModel)
+                .submitPayment();
+        Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
+            Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardExpMonthValidationMessage(), "Please fill out this field.");
+        });
 
-        }
-
+    }
 
 
 }
