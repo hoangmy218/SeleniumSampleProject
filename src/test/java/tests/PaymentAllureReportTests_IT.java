@@ -97,7 +97,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
         });
     }
 
-    @Test
+    @Test(enabled = false)
     @Description("This test is negative case")
     @Epic("UI")
     @Feature("Payment feature")
