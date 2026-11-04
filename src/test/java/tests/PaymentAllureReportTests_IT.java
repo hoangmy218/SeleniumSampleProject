@@ -7,6 +7,7 @@ import model.CardModel;
 import model.PaymentModel;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -97,7 +98,8 @@ public class PaymentAllureReportTests_IT extends BaseTest {
         });
     }
 
-    @Test(enabled = false)
+    @Test
+    @Ignore
     @Description("This test is negative case")
     @Epic("UI")
     @Feature("Payment feature")
