@@ -55,9 +55,9 @@
                     <execution>
                         <id>allure-report</id>
                         <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
+<!--                        <goals>-->
+<!--                            <goal>report</goal>-->
+<!--                        </goals>-->
                     </execution>
                 </executions>
             </plugin>
