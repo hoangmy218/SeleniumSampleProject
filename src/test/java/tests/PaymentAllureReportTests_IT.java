@@ -76,6 +76,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     }
 
     @Test
+    @Ignore
     @Description("This test is negative case")
     @Epic("UI")
     @Feature("Payment feature")
@@ -99,7 +100,6 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     }
 
     @Test
-    @Ignore
     @Description("This test is negative case")
     @Epic("UI")
     @Feature("Payment feature")
