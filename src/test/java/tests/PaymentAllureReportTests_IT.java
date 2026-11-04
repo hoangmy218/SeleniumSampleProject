@@ -6,6 +6,7 @@ import io.qameta.allure.*;
 import model.CardModel;
 import model.PaymentModel;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
@@ -76,7 +77,6 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     }
 
     @Test
-    @Ignore
     @Description("This test is negative case")
     @Epic("UI")
     @Feature("Payment feature")
@@ -112,6 +112,12 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Parameters({"CardName", "CardNumber"}) //Global parameters for every test inside block <test> in testng-parameters-allure.xml
     public void verifyValidationMessageOnCardCVCField(String cardName, String cardNumber) {
         Allure.label("layer", "unit");
+        boolean skipCondition = true; // Change this to false to see the test execute
+        System.out.println("This test checks a condition before deciding to run.");
+
+        if (skipCondition) {
+            throw new SkipException("Skipping this test due to a condition.");
+        }
 //        PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
 //        missingCardNumberForm.getCard().setCardNumber("");
 
