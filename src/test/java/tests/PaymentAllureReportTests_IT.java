@@ -138,35 +138,35 @@ public class PaymentAllureReportTests_IT extends BaseTest {
 
     }
 
-//    @Test
-//    @Description("This test is negative case")
-//    @Epic("UI")
-//    @Feature("Payment feature")
-//    @Story("Missing field")
-//    @Severity(SeverityLevel.NORMAL) //“trivial”, “minor”, “normal”, “critical”, and “blocker”.
-//    @Owner("My Ngo")
-//    @Link(name = "Website", url = "https://dev.example.com/")
-//    @Issue("AT-104")
-//    @TmsLink("AT-TR-54")
-//    @Parameters({"CardName", "CardNumber"})
-//    public void verifyValidationMessageOnCardExpMonthField(String cardName, String cardNumber) {
-//        Allure.label("layer", "unit");
-//
-//        CardModel cardModel = new CardModel();
-//        cardModel.setCardName(cardName);
-//        cardModel.setCardNumber(cardNumber);
-//        cardModel.setCardCVC(123);
-//        PaymentModel paymentModel = new PaymentModel();
-//        paymentModel.setCard(cardModel);
-//
-//        pages().paymentPage.goToPaymentPage();
-//        pages().paymentPage.fillPaymentFormWithBlankField(paymentModel)
-//                .submitPayment();
-//        Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
-//            Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardExpMonthValidationMessage(), "Please fill out this field.");
-//        });
-//
-//    }
+    @Test
+    @Description("This test is negative case")
+    @Epic("UI")
+    @Feature("Payment feature")
+    @Story("Missing field")
+    @Severity(SeverityLevel.NORMAL) //“trivial”, “minor”, “normal”, “critical”, and “blocker”.
+    @Owner("My Ngo")
+    @Link(name = "Website", url = "https://dev.example.com/")
+    @Issue("AT-104")
+    @TmsLink("AT-TR-54")
+    @Parameters({"CardName", "CardNumber"})
+    public void verifyValidationMessageOnCardExpMonthField(String cardName, String cardNumber) {
+        Allure.label("layer", "unit");
+
+        CardModel cardModel = new CardModel();
+        cardModel.setCardName(cardName);
+        cardModel.setCardNumber(cardNumber);
+        cardModel.setCardCVC(123);
+        PaymentModel paymentModel = new PaymentModel();
+        paymentModel.setCard(cardModel);
+
+        pages().paymentPage.goToPaymentPage();
+        pages().paymentPage.fillPaymentFormWithBlankField(paymentModel)
+                .submitPayment();
+        Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
+            Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardExpMonthValidationMessage(), "Please fill out this field.");
+        });
+
+    }
 
 
 }
