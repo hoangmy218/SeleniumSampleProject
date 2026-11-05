@@ -86,6 +86,7 @@ pipeline {
                 )
             }
 
+            //Clean Workspace
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
                     disableDeferredWipeout: true,
