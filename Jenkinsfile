@@ -34,6 +34,7 @@ pipeline {
 
     post {
         always {
+            //Email Template
             script {
                 // Determine color and status banner text based on build outcome
                 def buildStatus = currentBuild.result ?: 'SUCCESS'
@@ -47,6 +48,7 @@ pipeline {
                     bannerColor = '#6c757d' // Gray for aborted
                 }
 
+                //Send Email Result after built
                 emailext (
                     to: 'nthmy988@gmail.com',
                     subject: "${buildStatus}: Job '${env.JOB_NAME}' [Build #${env.BUILD_NUMBER}]",
