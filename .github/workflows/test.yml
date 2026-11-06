@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -23,15 +23,21 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y google-chrome-stable
       - name: Cache Maven dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests
         run: mvn clean verify
-      - name: Generate Allure report
-        run: mvn allure:report
+      - name: Generate Allure test report
+        uses: andgineer/allure-report@v3.6
+        id: allure-report
+        if: always()
+        with:
+          allure-results: allure-results
+          website: gh-pages-dir
+          reports-site-path: builds/tests
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v7
