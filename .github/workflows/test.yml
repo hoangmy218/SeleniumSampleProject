@@ -3,7 +3,7 @@ name: QA Test Suite
 
 on:
   push:
-    branches: [ main, setup-n-run-on-Jenkins ]
+    branches: [ main, gh-pages ]
   pull_request:
     branches: [ main ]
 
@@ -30,14 +30,19 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests
         run: mvn clean verify
-      - name: Generate Allure test report
-        uses: andgineer/allure-report@v3.6
-        id: allure-report
+      - name: Build test report
+        if: always()
+        run: |
+          npm install -g allure
+          allure generate build/allure-results -o allure-report
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v4
         if: always()
         with:
-          allure-results: allure-results
-          website: gh-pages-dir
-          reports-site-path: builds/tests
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v7
