@@ -44,7 +44,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: target/allure-report
-          
+
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v7

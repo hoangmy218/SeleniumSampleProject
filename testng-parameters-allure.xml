@@ -6,9 +6,6 @@
         <parameter name="CardNumber" value="1023456789"></parameter>
         <classes>
             <class name="tests.PaymentAllureReportTests_IT">
-<!--                <methods>-->
-<!--                    <exclude name="verifyValidationMessageOnCardNumberField"></exclude>-->
-<!--                </methods>-->
             </class>
         </classes>
     </test>

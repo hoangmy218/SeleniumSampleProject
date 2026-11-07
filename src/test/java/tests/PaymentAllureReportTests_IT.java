@@ -8,7 +8,6 @@ import model.PaymentModel;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
