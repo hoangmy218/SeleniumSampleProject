@@ -30,3 +30,6 @@ hs_err_pid*
 replay_pid*
 target/
 .allure/
+.idea/
+allure-report/
+allure-results/

@@ -6,6 +6,7 @@ import io.qameta.allure.*;
 import model.CardModel;
 import model.PaymentModel;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -22,9 +23,9 @@ public class PaymentAllureReportTests_IT extends BaseTest {
         ObjectMapper mapper = new ObjectMapper();
         PaymentModel[] validPaymentArray = mapper.readValue(jsonFile, PaymentModel[].class);
 
-        return new Object[][] {
-                { "TC_PM_04: Valid card - Expiring late", validPaymentArray[0]},
-                { "TC_PM_05: Valid card - Expiring soon", validPaymentArray[1]}
+        return new Object[][]{
+                {"TC_PM_04: Valid card - Expiring late", validPaymentArray[0]},
+                {"TC_PM_05: Valid card - Expiring soon", validPaymentArray[1]}
         };
     }
 
@@ -36,6 +37,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Issue("AT-100")
     @TmsLink("AT-TR-50")
     public void verifyOrderPlaceSuccessWithValidCard(String testCaseId, PaymentModel paymentData) {
+        Allure.label("layer", "integration");
         Allure.label("parentSuite", "Tests for Integration");
         Allure.suite("Tests for payment feature");
         Allure.label("subSuite", "Tests for main flows - happy cases");
@@ -61,6 +63,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Issue("AT-101")
     @TmsLink("AT-TR-51")
     public void verifyValidationMessageOnCardNameField() {
+        Allure.label("layer", "unit");
         PaymentModel missingCardNameForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
         missingCardNameForm.getCard().setCardName("");
 
@@ -83,6 +86,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Issue("AT-102")
     @TmsLink("AT-TR-52")
     public void verifyValidationMessageOnCardNumberField() {
+        Allure.label("layer", "unit");
         PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
         missingCardNumberForm.getCard().setCardNumber("");
 
@@ -104,8 +108,16 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @Link(name = "Website", url = "https://dev.example.com/")
     @Issue("AT-103")
     @TmsLink("AT-TR-53")
-    @Parameters({"CardName", "CardNumber"}) //Global parameters for every test inside block <test> in testng-parameters-allure.xml
+    @Parameters({"CardName", "CardNumber"})
+    //Global parameters for every test inside block <test> in testng-parameters-allure.xml
     public void verifyValidationMessageOnCardCVCField(String cardName, String cardNumber) {
+        Allure.label("layer", "unit");
+        boolean skipCondition = true; // Change this to false to see the test execute
+        System.out.println("This test checks a condition before deciding to run.");
+
+        if (skipCondition) {
+            throw new SkipException("Skipping this test due to a condition.");
+        }
 //        PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
 //        missingCardNumberForm.getCard().setCardNumber("");
 
@@ -122,9 +134,38 @@ public class PaymentAllureReportTests_IT extends BaseTest {
         Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
             Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardCVCValidationMessage(), "Please fill out this field.");
         });
+
     }
 
+    @Test
+    @Description("This test is negative case")
+    @Epic("UI")
+    @Feature("Payment feature")
+    @Story("Missing field")
+    @Severity(SeverityLevel.NORMAL) //“trivial”, “minor”, “normal”, “critical”, and “blocker”.
+    @Owner("My Ngo")
+    @Link(name = "Website", url = "https://dev.example.com/")
+    @Issue("AT-104")
+    @TmsLink("AT-TR-54")
+    @Parameters({"CardName", "CardNumber"})
+    public void verifyValidationMessageOnCardExpMonthField(String cardName, String cardNumber) {
+        Allure.label("layer", "unit");
 
+        CardModel cardModel = new CardModel();
+        cardModel.setCardName(cardName);
+        cardModel.setCardNumber(cardNumber);
+        cardModel.setCardCVC(123);
+        PaymentModel paymentModel = new PaymentModel();
+        paymentModel.setCard(cardModel);
+
+        pages().paymentPage.goToPaymentPage();
+        pages().paymentPage.fillPaymentFormWithBlankField(paymentModel)
+                .submitPayment();
+        Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
+            Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardExpMonthValidationMessage(), "Please fill out this field.");
+        });
+
+    }
 
 
 }

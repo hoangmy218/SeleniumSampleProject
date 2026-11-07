@@ -5,7 +5,8 @@
         <parameter name="CardName" value="Elly Han"></parameter>
         <parameter name="CardNumber" value="1023456789"></parameter>
         <classes>
-            <class name="tests.PaymentAllureReportTests_IT"/>
+            <class name="tests.PaymentAllureReportTests_IT">
+            </class>
         </classes>
     </test>
 

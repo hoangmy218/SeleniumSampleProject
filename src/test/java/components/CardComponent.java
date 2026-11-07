@@ -62,4 +62,8 @@ public class CardComponent extends BasePage {
     public String getCardCVCValidationMessage() {
         return cardCVCField.getAttribute("validationMessage");
     }
+
+    public String getCardExpMonthValidationMessage() {
+        return cardExpMonth.getAttribute("validationMessage");
+    }
 }
