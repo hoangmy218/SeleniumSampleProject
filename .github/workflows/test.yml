@@ -4,17 +4,39 @@ name: QA Test Suite
 on:
   push:
     branches: [ main, develop ]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
   pull_request:
     branches: [ main ]
   schedule:
     #Runs at 3:00 AM every weekday (Monday through Friday)
     - cron: '0 14 * * 1-5'
     - cron: '45 3 * * 0'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      deploy_docs:
+        description: 'Deploy documentation?'
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   test:
     runs-on: ubuntu-latest
     environment: staging
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox]
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -33,13 +55,13 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Run tests
-        run: mvn clean verify -Dbrowser=chrome -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
+      - name: Run tests on ${{ matrix.browser }}
+        run: mvn clean verify -Dbrowser=${{ matrix.browser }} -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
       - name: Build test report
         if: always()
         run: |
           npm install -g allure
-          allure generate target/allure-results --config allure3.js --output target/allure-report --clean
+          allure generate target/allure-results-${{ matrix.browser }} --config allure3.js --output target/allure-report-${{ matrix.browser }} --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
@@ -47,11 +69,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: target/allure-report
+          publish_dir: target/allure-report-${{ matrix.browser }}
 
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: allure-report
+          name: allure-report-${{ matrix.browser }}
           path: target
