@@ -13,6 +13,22 @@ on:
     #Runs at 3:00 AM every weekday (Monday through Friday)
     - cron: '0 14 * * 1-5'
     - cron: '45 3 * * 0'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      deploy_docs:
+        description: 'Deploy documentation?'
+        required: true
+        type: boolean
+        default: false
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -45,7 +61,7 @@ jobs:
         if: always()
         run: |
           npm install -g allure
-          allure generate target/allure-results --config allure3.js --output target/allure-report --clean
+          allure generate target/allure-results-${{ matrix.browser }} --config allure3.js --output target/allure-report-${{ matrix.browser }} --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
@@ -53,11 +69,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: target/allure-report
+          publish_dir: target/allure-report-${{ matrix.browser }}
 
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: allure-report
+          name: allure-report-${{ matrix.browser }}
           path: target
