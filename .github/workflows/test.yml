@@ -8,11 +8,23 @@ on:
     branches: [ main ]
   schedule:
     #Runs at 3:00 AM every weekday (Monday through Friday)
-    - cron: '0 3 * * 1-5'
+    - cron: '0 14 * * 1-5'
+    - cron: '30 3 * * 7'
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    midnight-job:
+      if: github.event.schedule == '0 14 * * 1-5'
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "This only runs at midnight"
+
+      noon-job:
+        if: github.event.schedule == '30 3 * * 7'
+        runs-on: ubuntu-latest
+        steps:
+          - run: echo "This only runs at noon Sunday"
+
     environment: staging
     steps:
       - name: Checkout code
