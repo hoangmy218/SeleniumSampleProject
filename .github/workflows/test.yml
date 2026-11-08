@@ -4,6 +4,9 @@ name: QA Test Suite
 on:
   push:
     branches: [ main, develop ]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
   pull_request:
     branches: [ main ]
   schedule:
