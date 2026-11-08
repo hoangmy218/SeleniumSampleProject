@@ -6,6 +6,9 @@ on:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
+  schedule:
+    #Runs at 3:00 AM every weekday (Monday through Friday)
+    - cron: '0 3 * * 1-5'
 
 jobs:
   test:
