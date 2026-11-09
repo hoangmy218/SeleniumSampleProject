@@ -96,7 +96,9 @@ jobs:
     if: always()
     needs: manual-trigger-job
     steps:
-      # ...
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v7
       # Checkout history from gh-pages branch
       - name: Get Allure history from gh-pages
         uses: actions/checkout@v4
