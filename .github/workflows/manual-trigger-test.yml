@@ -121,12 +121,12 @@ jobs:
           find . -not -path '*/.*' # Lists all files while skipping hidden folders like .git
 
       - name: Upload Allure history
-          if: always()
-          uses: actions/upload-artifact@v7
-          with:
-            name: history.jsonl
-            path: ./
-            compression-level: 0
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: history.jsonl
+          path: ./
+          compression-level: 0
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
