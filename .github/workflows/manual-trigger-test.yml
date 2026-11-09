@@ -100,12 +100,13 @@ jobs:
           name: allure-results-firefox
           path: ./
 
-      - name: Download Allure history if it exists
-        uses: actions/download-artifact@v4
+      - name: Restore Allure history
+        uses: actions/cache@v4
         continue-on-error: true
         with:
-          name: history
-          path: ./
+          path: ./history.jsonl
+          key: allure-history-${{ github.run_id }}
+          restore-keys: allure-history-
 
       - name: Build report
         # Building the multistage report from all fetched dump archives
@@ -121,14 +122,13 @@ jobs:
           echo "=== Full Directory Tree ==="
           find . -not -path '*/.*' # Lists all files while skipping hidden folders like .git
 
-      - name: Upload Allure history
+      - name: Save Allure history cache
+        uses: actions/cache/save@v4
+        continue-on-error: true
         if: always()
-        uses: actions/upload-artifact@v7
         with:
-          name: history
           path: ./history.jsonl
-          compression-level: 0
-          retention-days: 10
+          key: allure-history-${{ github.run_id }}
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
