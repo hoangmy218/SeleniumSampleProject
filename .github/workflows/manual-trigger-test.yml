@@ -92,7 +92,7 @@ jobs:
       # ...
 
       - name: Checkout code
-          uses: actions/checkout@v7
+        uses: actions/checkout@v7
 
       # Fetching the dump archive of history for the Chrome test run
       - name: Download allure history from chrome
@@ -135,4 +135,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./allure-report
-
