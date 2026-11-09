@@ -102,7 +102,9 @@ jobs:
 
       - name: Build report
         # Building the multistage report from all fetched dump archives
-        run: allure generate --dump="allure-results-*.zip" --output=./allure-report
+        run: |
+          npm install -g allure
+          allure generate --dump="allure-results-*.zip" --output=./allure-report
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
