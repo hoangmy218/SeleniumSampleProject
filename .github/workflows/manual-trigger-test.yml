@@ -124,8 +124,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: history.jsonl
-          path: ./
+          name: history
+          path: ./history.jsonl
           compression-level: 0
 
       - name: Publish test report
