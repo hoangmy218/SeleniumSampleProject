@@ -110,19 +110,14 @@ jobs:
       - name: Extract dumps and restore history
         run: |
           mkdir -p target/allure-results
-
-          # Extract fump files into allure-results directory
           unzip -o "allure-results-chrome.zip" -d target/allure-results
           unzip -o "allure-results-firefox.zip" -d target/allure-results
-
-          # Restore history directory if the branch gh-pages exists
           if [ -d "gh-pages-history/history" ]; then
             cp -r gh-pages-history/history target/allure-results/
             echo "History restored successfully!"
           else
             echo "No previous history found. Starting fresh."
           fi
-
       - name: Build report
         # Building the multistage report from all fetched dump archives
         run: |
