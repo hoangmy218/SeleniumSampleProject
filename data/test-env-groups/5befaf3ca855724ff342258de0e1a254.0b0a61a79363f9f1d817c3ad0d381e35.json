@@ -1,0 +1,1 @@
+{"id":"5befaf3ca855724ff342258de0e1a254.0b0a61a79363f9f1d817c3ad0d381e35","fullName":"tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField","name":"verifyValidationMessageOnCardExpMonthField","status":"broken","testResultsByEnv":{"ubuntu-firefox":"5535294a86aa657d0a78b1be5a8e3854","ubuntu-chrome":"18349fb16ad0432e11db6268f37a7e12"}}
