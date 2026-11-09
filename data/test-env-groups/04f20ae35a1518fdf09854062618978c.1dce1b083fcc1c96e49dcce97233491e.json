@@ -1,1 +1,1 @@
-{"id":"04f20ae35a1518fdf09854062618978c.1dce1b083fcc1c96e49dcce97233491e","fullName":"tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard","name":"verifyOrderPlaceSuccessWithValidCard","status":"skipped","testResultsByEnv":{"default":"dbc1471e738ba14b589f92bf5af09112"}}
+{"id":"04f20ae35a1518fdf09854062618978c.1dce1b083fcc1c96e49dcce97233491e","fullName":"tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard","name":"verifyOrderPlaceSuccessWithValidCard","status":"passed","testResultsByEnv":{"default":"498dd495b1ffa3d06e794978de375338"}}
