@@ -22,6 +22,9 @@ on:
         required: true
         type: boolean
         default: false
+concurrency:
+#  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   manual-trigger-job:
