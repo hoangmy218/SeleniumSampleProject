@@ -49,6 +49,9 @@ jobs:
       - name: Setup GeckoDriver
         if: matrix.browser == 'firefox'
         uses: browser-actions/setup-geckodriver@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+        run: geckodriver --version
 
       - name: Cache Maven dependencies
         uses: actions/cache@v5
