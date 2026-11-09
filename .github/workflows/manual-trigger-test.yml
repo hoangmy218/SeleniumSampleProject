@@ -75,12 +75,12 @@ jobs:
           compression-level: 0
 
       - name: Upload Allure history
-          if: always()
-          uses: actions/upload-artifact@v7
-          with:
-            name: history.jsonl
-            path: ./allure-history-${{ matrix.browser }}.zip
-            compression-level: 0
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: history.jsonl
+          path: ./allure-history-${{ matrix.browser }}.zip
+          compression-level: 0
 
   report:
     runs-on: ubuntu-latest
