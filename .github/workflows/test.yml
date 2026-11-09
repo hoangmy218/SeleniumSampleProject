@@ -1,11 +1,18 @@
 # .github/workflows/test.yml
-name: QA Test Suite
+name: QA Test Suite - Event Triggered CI
 
 on:
   push:
     branches: [ main, develop ]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
   pull_request:
     branches: [ main ]
+  schedule:
+    #Runs at 3:00 AM every weekday (Monday through Friday)
+    - cron: '0 14 * * 1-5'
+    - cron: '45 3 * * 0'
 
 jobs:
   test:

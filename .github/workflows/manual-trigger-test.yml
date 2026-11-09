@@ -1,0 +1,130 @@
+# .github/workflows/test.yml
+name: QA Test Suite - Manual Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      deploy_docs:
+        description: 'Deploy documentation?'
+        required: true
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  manual-trigger-job:
+    runs-on: ubuntu-latest
+    environment: staging
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [ chrome, firefox ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Setup GeckoDriver
+        if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-geckodriver@latest
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run tests on ${{ matrix.browser }} and Save the full state of run into the dump archive
+        run: |
+          npm install -g allure
+          allure run --config allure3.js --environment=ubuntu-"${{ matrix.browser }}" --dump="allure-results-${{ matrix.browser }}" -- mvn clean verify -Dbrowser=${{ matrix.browser }} -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: ./allure-results-${{ matrix.browser }}.zip
+          compression-level: 0
+
+  report:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: manual-trigger-job
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # Fetching the dump archive for the Chrome test run
+      - name: Download allure results from chrome
+        uses: actions/download-artifact@v6
+        with:
+          name: allure-results-chrome
+          path: ./
+
+      # Fetching the dump archive for the Firefox test run
+      - name: Download allure results from firefox
+        uses: actions/download-artifact@v6
+        with:
+          name: allure-results-firefox
+          path: ./
+
+      - name: Restore Allure history
+        uses: actions/cache@v4
+        continue-on-error: true
+        with:
+          path: ./history.jsonl
+          key: allure-history-${{ github.run_id }}
+          restore-keys: allure-history-
+
+      - name: Build report
+        # Building the multistage report from all fetched dump archives
+        run: |
+          npm install -g allure
+          allure generate --dump="allure-results-*.zip" --config allure3.js --output=./allure-report
+
+      - name: Save Allure history cache
+        uses: actions/cache/save@v4
+        continue-on-error: true
+        if: always()
+        with:
+          path: ./history.jsonl
+          key: allure-history-${{ github.run_id }}
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./allure-report
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-report
+          path: ./allure-report
