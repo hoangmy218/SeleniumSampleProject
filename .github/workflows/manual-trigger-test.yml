@@ -1,5 +1,5 @@
 # .github/workflows/test.yml
-name: QA Test Suite - Manual Trigger
+name: QA Test Suite
 
 on:
   workflow_dispatch:
@@ -17,10 +17,6 @@ on:
         required: true
         type: boolean
         default: false
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   manual-trigger-job:
@@ -63,45 +59,6 @@ jobs:
 
       - name: Upload Allure report
         if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: allure-results-${{ matrix.browser }}
-          path: ./allure-results-${{ matrix.browser }}.zip
-          compression-level: 0
-
-  report:
-    runs-on: ubuntu-latest
-    if: always()
-    needs: manual-trigger-job
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      # Fetching the dump archive for the Chrome test run
-      - name: Download allure results from chrome
-        uses: actions/download-artifact@v6
-        with:
-          name: allure-results-chrome
-          path: ./
-
-      # Fetching the dump archive for the Firefox test run
-      - name: Download allure results from firefox
-        uses: actions/download-artifact@v6
-        with:
-          name: allure-results-firefox
-          path: ./
-
-      - name: Restore Allure history
-        uses: actions/cache@v4
-        continue-on-error: true
-        with:
-          path: ./history.jsonl
-          key: allure-history-${{ github.run_id }}
-          restore-keys: allure-history-
-
-      - name: Build report
-        # Building the multistage report from all fetched dump archives
         run: |
           npm install -g allure
           allure generate --dump="allure-results-*.zip" --config allure3.js --output=./allure-report
@@ -135,4 +92,4 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: allure-report
-          path: target/allure-report
+          path: ./allure-report
