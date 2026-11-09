@@ -78,8 +78,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: history.jsonl
-          path: ./allure-history-${{ matrix.browser }}.zip
+          name: history
+          path: ./history.jsonl
           compression-level: 0
 
   report:
@@ -98,14 +98,14 @@ jobs:
       - name: Download allure history from chrome
         uses: actions/download-artifact@v6
         with:
-          name: allure-history-chrome
+          name: history
           path: ./
 
       # Fetching the dump archive of history for the Firefox test run
       - name: Download allure history from firefox
         uses: actions/download-artifact@v6
         with:
-          name: allure-history-firefox
+          name: history
           path: ./
 
       # Fetching the dump archive for the Chrome test run
