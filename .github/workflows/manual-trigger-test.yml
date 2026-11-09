@@ -144,6 +144,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-#          publish_dir: ./allure-report
           publish_dir: target/allure-report
-          keep_files: true # Keep history on the branch gh-pages
