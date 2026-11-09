@@ -60,31 +60,15 @@
  
 Current Operating System: LINUX
 Current Architecture: amd64
-Current Browser Selection: CHROME
+Current Browser Selection: FIREFOX
  
  
 Current Operating System: LINUX
 Current Architecture: amd64
-Current Browser Selection: CHROME
+Current Browser Selection: FIREFOX
  
-[TestNG-test-Payment - Allure Report Tests-1] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 156.0.8078.80 (resolved driver for Chrome 156)
-[TestNG-test-Payment - Allure Report Tests-2] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 156.0.8078.80 (resolved driver for Chrome 156)
-[TestNG-test-Payment - Allure Report Tests-1] INFO io.github.bonigarcia.wdm.online.Downloader - Downloading https://storage.googleapis.com/chrome-for-testing-public/156.0.8078.80/linux64/chromedriver-linux64.zip
-[TestNG-test-Payment - Allure Report Tests-2] INFO io.github.bonigarcia.wdm.online.Downloader - Downloading https://storage.googleapis.com/chrome-for-testing-public/156.0.8078.80/linux64/chromedriver-linux64.zip
-[TestNG-test-Payment - Allure Report Tests-2] INFO io.github.bonigarcia.wdm.online.Downloader - Extracting driver from compressed file chromedriver-linux64.zip
-[TestNG-test-Payment - Allure Report Tests-1] INFO io.github.bonigarcia.wdm.online.Downloader - Extracting driver from compressed file chromedriver-linux64.zip
-[TestNG-test-Payment - Allure Report Tests-2] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as /home/runner/.cache/selenium/chromedriver/linux64/156.0.8078.80/chromedriver
-[TestNG-test-Payment - Allure Report Tests-1] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as /home/runner/.cache/selenium/chromedriver/linux64/156.0.8078.80/chromedriver
-Nov 09, 2026 11:18:42 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find CDP implementation matching 156
-Nov 09, 2026 11:18:42 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
-WARNING: Unable to find version of CDP to use for 156.0.8078.79. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.38.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Nov 09, 2026 11:18:42 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find CDP implementation matching 156
-Nov 09, 2026 11:18:42 AM org.openqa.selenium.chromium.ChromiumDriver lambda$new$4
-WARNING: Unable to find version of CDP to use for 156.0.8078.79. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.38.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 This test checks a condition before deciding to run.
-[WARNING] Tests run: 6, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 21.90 s -- in TestSuite
+[WARNING] Tests run: 6, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 38.98 s -- in TestSuite
 [INFO] 
 [INFO] Results:
 [INFO] 
@@ -95,6 +79,6 @@ This test checks a condition before deciding to run.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  29.805 s
-[INFO] Finished at: 2026-11-09T11:18:49Z
+[INFO] Total time:  46.900 s
+[INFO] Finished at: 2026-11-09T11:26:27Z
 [INFO] ------------------------------------------------------------------------
