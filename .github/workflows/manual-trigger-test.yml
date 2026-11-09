@@ -63,9 +63,6 @@ jobs:
 
       - name: Upload Allure report
         if: always()
-        run: |
-          npm install -g allure
-          allure generate --dump="allure-results-*.zip" --config allure3.js --output=./allure-report
         uses: actions/upload-artifact@v7
         with:
           name: allure-results-${{ matrix.browser }}
