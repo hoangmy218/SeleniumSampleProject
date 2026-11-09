@@ -68,77 +68,25 @@ Current Architecture: amd64
 Current Browser Selection: FIREFOX
  
 This test checks a condition before deciding to run.
-Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222225009_verifyOrderPlaceSuccessWithValidCard.png
+Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222324611_verifyValidationMessageOnCardExpMonthField.png
 Test Failed at page: https://automationexercise.com//payment
-Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222225429_verifyValidationMessageOnCardExpMonthField.png
+Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222324675_verifyOrderPlaceSuccessWithValidCard.png
 Test Failed at page: https://automationexercise.com//payment
-Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222227379_verifyOrderPlaceSuccessWithValidCard.png
+Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222326818_verifyOrderPlaceSuccessWithValidCard.png
 Test Failed at page: https://automationexercise.com//payment
-Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222227584_verifyValidationMessageOnCardNameField.png
+Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794222326985_verifyValidationMessageOnCardNameField.png
 Test Failed at page: https://automationexercise.com//payment
-[ERROR] Tests run: 6, Failures: 4, Errors: 0, Skipped: 1, Time elapsed: 28.92 s <<< FAILURE! -- in TestSuite
-[ERROR] tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard[TC_PM_04: Valid card - Expiring late, PaymentModel{ CardFormModel{ cardName='Hellen Ngo', cardNumber='123456789', cardCVC='890', expiryMonth='3', expiryYear='2027'}}](1) -- Time elapsed: 3.427 s <<< FAILURE!
+[ERROR] Tests run: 6, Failures: 4, Errors: 0, Skipped: 1, Time elapsed: 32.86 s <<< FAILURE! -- in TestSuite
+[ERROR] tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField[Elly Han, 1023456789](1) -- Time elapsed: 2.839 s <<< FAILURE!
 org.openqa.selenium.ElementClickInterceptedException: 
-Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_2" name="aswift_2" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=3&uci=a!3&btvi=2"> obscures it
+Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_3" name="aswift_3" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=4&uci=a!4&btvi=2"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [9cc2042d-806d-4954-8539-3dc76af2a3ee, clickElement {id=aee10c9e-81b8-4485-8c14-51315e4e587d}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3011, moz:profile: /tmp/rust_mozprofilea6h9cO, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (9cc2042d-806d-4954-8539-3dc76af2a3ee)] -> css selector: [data-qa='pay-button']]
-Session ID: 9cc2042d-806d-4954-8539-3dc76af2a3ee
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at jdk.proxy2/jdk.proxy2.$Proxy24.click(Unknown Source)
-	at pages.BasePage.clickElement(BasePage.java:121)
-	at pages.PaymentPage.submitPayment(PaymentPage.java:53)
-	at tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard(PaymentAllureReportTests_IT.java:49)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.testng.internal.thread.graph.TestNGFutureTask.run(TestNGFutureTask.java:22)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-
-[ERROR] tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField[Elly Han, 1023456789](1) -- Time elapsed: 0.149 s <<< FAILURE!
-org.openqa.selenium.ElementClickInterceptedException: 
-Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_2" name="aswift_2" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=3&uci=a!3&btvi=2"> obscures it
-Build info: version: '4.38.0', revision: '6b412e825c*'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [84121a96-1ee1-4c0b-8b32-37956c353dca, clickElement {id=3a81e18c-76de-4e5c-92dd-2c20696c24e1}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3012, moz:profile: /tmp/rust_mozprofilewi3An0, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (84121a96-1ee1-4c0b-8b32-37956c353dca)] -> css selector: [data-qa='pay-button']]
-Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
+Command: [b5ea2da7-73c1-4a79-8732-57d42c36178d, clickElement {id=981386a3-57ce-4b69-8a17-8eb7cfaf0cdd}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2794, moz:profile: /tmp/rust_mozprofileXextKV, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (b5ea2da7-73c1-4a79-8732-57d42c36178d)] -> css selector: [data-qa='pay-button']]
+Session ID: b5ea2da7-73c1-4a79-8732-57d42c36178d
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -181,16 +129,16 @@ Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:840)
 
-[ERROR] tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard[TC_PM_05: Valid card - Expiring soon, PaymentModel{ CardFormModel{ cardName='Lil Nui', cardNumber='2308893304', cardCVC='355', expiryMonth='12', expiryYear='2026'}}](2) -- Time elapsed: 1.843 s <<< FAILURE!
+[ERROR] tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard[TC_PM_04: Valid card - Expiring late, PaymentModel{ CardFormModel{ cardName='Hellen Ngo', cardNumber='123456789', cardCVC='890', expiryMonth='3', expiryYear='2027'}}](1) -- Time elapsed: 2.903 s <<< FAILURE!
 org.openqa.selenium.ElementClickInterceptedException: 
-Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <div class="grippy-host"> obscures it
+Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_3" name="aswift_3" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=4&uci=a!4&btvi=2"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [9cc2042d-806d-4954-8539-3dc76af2a3ee, clickElement {id=7f25b64a-36c7-4471-a32c-0d13d2f47425}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3011, moz:profile: /tmp/rust_mozprofilea6h9cO, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (9cc2042d-806d-4954-8539-3dc76af2a3ee)] -> css selector: [data-qa='pay-button']]
-Session ID: 9cc2042d-806d-4954-8539-3dc76af2a3ee
+Command: [1d59fca3-6010-414b-8742-fe4c20978f9e, clickElement {id=18d3cce5-7661-4c47-996f-6562eee2c6e4}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2793, moz:profile: /tmp/rust_mozprofilewTiOVf, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (1d59fca3-6010-414b-8742-fe4c20978f9e)] -> css selector: [data-qa='pay-button']]
+Session ID: 1d59fca3-6010-414b-8742-fe4c20978f9e
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -233,16 +181,68 @@ Session ID: 9cc2042d-806d-4954-8539-3dc76af2a3ee
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:840)
 
-[ERROR] tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardNameField -- Time elapsed: 0.053 s <<< FAILURE!
+[ERROR] tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard[TC_PM_05: Valid card - Expiring soon, PaymentModel{ CardFormModel{ cardName='Lil Nui', cardNumber='2308893304', cardCVC='355', expiryMonth='12', expiryYear='2026'}}](2) -- Time elapsed: 2.006 s <<< FAILURE!
 org.openqa.selenium.ElementClickInterceptedException: 
 Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <div class="grippy-host"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [84121a96-1ee1-4c0b-8b32-37956c353dca, clickElement {id=0664d090-045b-4584-b811-6519f5c44fcc}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3012, moz:profile: /tmp/rust_mozprofilewi3An0, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (84121a96-1ee1-4c0b-8b32-37956c353dca)] -> css selector: [data-qa='pay-button']]
-Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
+Command: [1d59fca3-6010-414b-8742-fe4c20978f9e, clickElement {id=36d9ca3d-d01f-494a-9c8a-a0d63c8cc8d7}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2793, moz:profile: /tmp/rust_mozprofilewTiOVf, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (1d59fca3-6010-414b-8742-fe4c20978f9e)] -> css selector: [data-qa='pay-button']]
+Session ID: 1d59fca3-6010-414b-8742-fe4c20978f9e
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at jdk.proxy2/jdk.proxy2.$Proxy24.click(Unknown Source)
+	at pages.BasePage.clickElement(BasePage.java:121)
+	at pages.PaymentPage.submitPayment(PaymentPage.java:53)
+	at tests.PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard(PaymentAllureReportTests_IT.java:49)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.testng.internal.thread.graph.TestNGFutureTask.run(TestNGFutureTask.java:22)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+[ERROR] tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardNameField -- Time elapsed: 0.037 s <<< FAILURE!
+org.openqa.selenium.ElementClickInterceptedException: 
+Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <div class="grippy-host"> obscures it
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [b5ea2da7-73c1-4a79-8732-57d42c36178d, clickElement {id=846b0ca2-f35f-4f6c-b0d3-6c665c2a42dd}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2794, moz:profile: /tmp/rust_mozprofileXextKV, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (b5ea2da7-73c1-4a79-8732-57d42c36178d)] -> css selector: [data-qa='pay-button']]
+Session ID: b5ea2da7-73c1-4a79-8732-57d42c36178d
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -289,38 +289,38 @@ Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
 [INFO] Results:
 [INFO] 
 [ERROR] Failures: 
-[ERROR]   PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard:49 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_2" name="aswift_2" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=3&uci=a!3&btvi=2"> obscures it
+[ERROR]   PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard:49 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_3" name="aswift_3" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=4&uci=a!4&btvi=2"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [9cc2042d-806d-4954-8539-3dc76af2a3ee, clickElement {id=aee10c9e-81b8-4485-8c14-51315e4e587d}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3011, moz:profile: /tmp/rust_mozprofilea6h9cO, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (9cc2042d-806d-4954-8539-3dc76af2a3ee)] -> css selector: [data-qa='pay-button']]
-Session ID: 9cc2042d-806d-4954-8539-3dc76af2a3ee
+Command: [1d59fca3-6010-414b-8742-fe4c20978f9e, clickElement {id=18d3cce5-7661-4c47-996f-6562eee2c6e4}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2793, moz:profile: /tmp/rust_mozprofilewTiOVf, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (1d59fca3-6010-414b-8742-fe4c20978f9e)] -> css selector: [data-qa='pay-button']]
+Session ID: 1d59fca3-6010-414b-8742-fe4c20978f9e
 [ERROR]   PaymentAllureReportTests_IT.verifyOrderPlaceSuccessWithValidCard:49 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <div class="grippy-host"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [9cc2042d-806d-4954-8539-3dc76af2a3ee, clickElement {id=7f25b64a-36c7-4471-a32c-0d13d2f47425}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3011, moz:profile: /tmp/rust_mozprofilea6h9cO, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (9cc2042d-806d-4954-8539-3dc76af2a3ee)] -> css selector: [data-qa='pay-button']]
-Session ID: 9cc2042d-806d-4954-8539-3dc76af2a3ee
-[ERROR]   PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField:163 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_2" name="aswift_2" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=3&uci=a!3&btvi=2"> obscures it
+Command: [1d59fca3-6010-414b-8742-fe4c20978f9e, clickElement {id=36d9ca3d-d01f-494a-9c8a-a0d63c8cc8d7}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2793, moz:profile: /tmp/rust_mozprofilewTiOVf, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (1d59fca3-6010-414b-8742-fe4c20978f9e)] -> css selector: [data-qa='pay-button']]
+Session ID: 1d59fca3-6010-414b-8742-fe4c20978f9e
+[ERROR]   PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField:163 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_3" name="aswift_3" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=4&uci=a!4&btvi=2"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [84121a96-1ee1-4c0b-8b32-37956c353dca, clickElement {id=3a81e18c-76de-4e5c-92dd-2c20696c24e1}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3012, moz:profile: /tmp/rust_mozprofilewi3An0, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (84121a96-1ee1-4c0b-8b32-37956c353dca)] -> css selector: [data-qa='pay-button']]
-Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
+Command: [b5ea2da7-73c1-4a79-8732-57d42c36178d, clickElement {id=981386a3-57ce-4b69-8a17-8eb7cfaf0cdd}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2794, moz:profile: /tmp/rust_mozprofileXextKV, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (b5ea2da7-73c1-4a79-8732-57d42c36178d)] -> css selector: [data-qa='pay-button']]
+Session ID: b5ea2da7-73c1-4a79-8732-57d42c36178d
 [ERROR]   PaymentAllureReportTests_IT.verifyValidationMessageOnCardNameField:72 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <div class="grippy-host"> obscures it
 Build info: version: '4.38.0', revision: '6b412e825c*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [84121a96-1ee1-4c0b-8b32-37956c353dca, clickElement {id=0664d090-045b-4584-b811-6519f5c44fcc}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 3012, moz:profile: /tmp/rust_mozprofilewi3An0, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
-Element: [[FirefoxDriver: firefox on linux (84121a96-1ee1-4c0b-8b32-37956c353dca)] -> css selector: [data-qa='pay-button']]
-Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
+Command: [b5ea2da7-73c1-4a79-8732-57d42c36178d, clickElement {id=846b0ca2-f35f-4f6c-b0d3-6c665c2a42dd}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2794, moz:profile: /tmp/rust_mozprofileXextKV, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (b5ea2da7-73c1-4a79-8732-57d42c36178d)] -> css selector: [data-qa='pay-button']]
+Session ID: b5ea2da7-73c1-4a79-8732-57d42c36178d
 [INFO] 
 [ERROR] Tests run: 6, Failures: 4, Errors: 0, Skipped: 1
 [INFO] 
@@ -329,8 +329,8 @@ Session ID: 84121a96-1ee1-4c0b-8b32-37956c353dca
 [INFO] ------------------------------------------------------------------------
 [ERROR] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  38.215 s
-[INFO] Finished at: 2026-11-09T11:03:51Z
+[INFO] Total time:  40.897 s
+[INFO] Finished at: 2026-11-09T11:05:30Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project SeleniumSampleProject: There are test failures.
 [ERROR] 
