@@ -17,25 +17,25 @@ export default {
         includePassedTests: true,
     },
     categories: {
-            rules: [
-                {
-                    name: "Critical regressions by layer",
-                    id: "critical-regressions-by-layer",
-                    matchers: {
-                        statuses: ["failed", "broken"],
-                        flaky: true,
-                        labels: {
-                            severity: "critical"
-                        }
-                    },
-                    groupBy: ["layer", "owner", "status"],
-                    groupByMessage: true,
-                    groupEnvironments: true,
-                    expand: true,
-                    hide: false
-                }
-            ]
-        },
+        rules: [
+            {
+                name: "Critical regressions by layer",
+                id: "critical-regressions-by-layer",
+                matchers: {
+                    statuses: ["failed", "broken"],
+                    flaky: true,
+                    labels: {
+                        severity: "critical"
+                    }
+                },
+                groupBy: ["layer", "owner", "status"],
+                groupByMessage: true,
+                groupEnvironments: true,
+                expand: true,
+                hide: false
+            }
+        ]
+    },
     resolutions: {
         links: {
             jira: {
@@ -56,13 +56,41 @@ export default {
         ]
     },
     environments: {
-        dev: {
-            name: "dev",
-            matcher: ({ labels }) => labels.some(({ name, value }) => name === "env" && value === "dev")
+        "windows-chrome": {
+            matcher: ({labels}) =>
+                labels.some(l => l.name === "os" && l.value === "Windows") &&
+                labels.some(l => l.name === "browser" && l.value === "Chrome"),
+            variables: {
+                "Browser": "Chrome",
+                "OS": "Windows",
+            }
         },
-        staging: {
-            name: "Staging",
-            matcher: ({ labels }) => labels.some(({ name, value }) => name === "env" && value === "staging")
+        "windows-firefox": {
+            matcher: ({labels}) =>
+                labels.some(l => l.name === "os" && l.value === "Windows") &&
+                labels.some(l => l.name === "browser" && l.value === "Firefox"),
+            variables: {
+                "Browser": "Firefox",
+                "OS": "Windows",
+            }
+        },
+        "ubuntu-chrome": {
+            matcher: ({labels}) =>
+                labels.some(l => l.name === "os" && l.value === "Ubuntu") &&
+                labels.some(l => l.name === "browser" && l.value === "Chrome"),
+            variables: {
+                "Browser": "Chrome",
+                "OS": "Ubuntu",
+            }
+        },
+        "ubuntu-firefox": {
+            matcher: ({labels}) =>
+                labels.some(l => l.name === "os" && l.value === "Ubuntu") &&
+                labels.some(l => l.name === "browser" && l.value === "Firefox"),
+            variables: {
+                "Browser": "Firefox",
+                "OS": "Ubuntu",
+            }
         }
-    },
+    }
 };

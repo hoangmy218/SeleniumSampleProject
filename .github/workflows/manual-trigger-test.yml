@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chrome, firefox]
+        browser: [ chrome, firefox ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -52,13 +52,53 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Run tests on ${{ matrix.browser }}
-        run: mvn clean verify -Dbrowser=${{ matrix.browser }} -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
-      - name: Build test report
-        if: always()
+      - name: Run tests on ${{ matrix.browser }} and Save the full state of run into the dump archive
         run: |
           npm install -g allure
-          allure generate target/allure-results --config allure3.js --output target/allure-report --clean
+          allure run --config allure3.js --environment=ubuntu-"${{ matrix.browser }}" --dump="allure-results-${{ matrix.browser }}" -- mvn clean verify -Dbrowser=${{ matrix.browser }} -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
+      #      - name: Build test report
+      #        if: always()
+      #        run: |
+      #          npm install -g allure
+      #          allure generate target/allure-results --config allure3.js --output target/allure-report --clean
+      #      - name: Generate a unified report from all dump archives
+      #          if: always()
+      #          run: allure generate --dump=stage_*.zip
+
+
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: ./allure-results-${{ matrix.browser }}.zip
+          compression-level: 0
+  report:
+    runs-on: ubuntu-latest
+    needs: manual-trigger-job
+    steps:
+      # ...
+      # Report generator set up steps
+      # ...
+
+      # Fetching the dump archive for the Chrome test run
+      - name: Download allure results from chrome
+        uses: actions/download-artifact@v6
+        with:
+          name: allure-results-chrome
+          path: ./
+
+      # Fetching the dump archive for the Firefox test run
+      - name: Download allure results from firefox
+        uses: actions/download-artifact@v6
+        with:
+          name: allure-results-firefox
+          path: ./
+
+      - name: Build report
+        # Building the multistage report from all fetched dump archives
+        run: allure generate --dump="allure-results-*.zip" --output=./allure-report
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
@@ -67,10 +107,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: target/allure-report
-
-      - name: Upload Allure report
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: allure-report
-          path: target
