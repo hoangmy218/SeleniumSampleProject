@@ -71,7 +71,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
         pages().paymentPage.fillPaymentForm(missingCardNameForm)
                 .submitPayment();
         Allure.step("Verify display 'Please fill out this field.' message when submitting", () -> {
-            Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardNameValidationMessage(), "Please fill out this field");
+            Assert.assertEquals(pages().paymentPage.cardDetailsForm.getCardNameValidationMessage(), "Please fill out this field.");
         });
     }
 
@@ -87,7 +87,7 @@ public class PaymentAllureReportTests_IT extends BaseTest {
     @TmsLink("AT-TR-52")
     public void verifyValidationMessageOnCardNumberField() {
         Allure.label("layer", "unit");
-        PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.jsn", PaymentModel.class);
+        PaymentModel missingCardNumberForm = JSONDataLoader.loadData("testdata/valid_payment.json", PaymentModel.class);
         missingCardNumberForm.getCard().setCardNumber("");
 
         pages().paymentPage.goToPaymentPage();
