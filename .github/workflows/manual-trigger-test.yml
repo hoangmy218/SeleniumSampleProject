@@ -1,5 +1,5 @@
 # .github/workflows/test.yml
-name: QA Test Suite - Manual Trigger
+name: Manual Test Trigger
 
 on:
   push:
@@ -84,7 +84,13 @@ jobs:
     needs: manual-trigger-job
     steps:
       # ...
-      # Report generator set up steps
+      # Checkout history from gh-pages branch
+      - name: Get Allure history from gh-pages
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages-history
       # ...
 
       # Fetching the dump archive for the Chrome test run
@@ -101,11 +107,28 @@ jobs:
           name: allure-results-firefox
           path: ./
 
+      - name: Extract dumps and restore history
+        run: |
+          mkdir -p target/allure-results
+
+          # Extract fump files into allure-results directory
+          unzip -o "allure-results-chrome.zip" -d target/allure-results
+          unzip -o "allure-results-firefox.zip" -d target/allure-results
+
+          # Restore history directory if the branch gh-pages exists
+          if [ -d "gh-pages-history/history" ]; then
+            cp -r gh-pages-history/history target/allure-results/
+            echo "History restored successfully!"
+          else
+            echo "No previous history found. Starting fresh."
+          fi
+
       - name: Build report
         # Building the multistage report from all fetched dump archives
         run: |
           npm install -g allure
-          allure generate --dump="allure-results-*.zip" --output=./allure-report
+#          allure generate --dump="allure-results-*.zip" --output=./allure-report
+          allure generate target/allure-results --output=target/allure-report --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
@@ -113,4 +136,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./allure-report
+#          publish_dir: ./allure-report
+          publish_dir: target/allure-report
+          keep_files: true # Keep history on the branch gh-pages
