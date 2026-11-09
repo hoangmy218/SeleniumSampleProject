@@ -42,7 +42,7 @@ jobs:
         if: always()
         run: |
           npm install -g allure
-          allure generate target/allure-results --environment=ubuntu-chrome --config allure3.js --output target/allure-report --clean
+          allure generate target/allure-results --config allure3.js --output target/allure-report --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
