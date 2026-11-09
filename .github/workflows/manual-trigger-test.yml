@@ -128,6 +128,7 @@ jobs:
           name: history
           path: ./history.jsonl
           compression-level: 0
+          retention-days: 10
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
