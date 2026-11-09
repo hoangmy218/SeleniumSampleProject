@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         browser: [chrome, firefox]
     steps:
