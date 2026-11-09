@@ -1,7 +1,12 @@
 # .github/workflows/test.yml
-name: QA Test Suite
+name: QA Test Suite - Manual Trigger
 
 on:
+  push:
+    branches: [ github-action-workflows ]
+      paths-ignore:
+        - 'README.md'
+        - '.gitignore'
   workflow_dispatch:
     inputs:
       environment:
@@ -19,7 +24,7 @@ on:
         default: false
 
 jobs:
-  test:
+  manual-trigger-job:
     runs-on: ubuntu-latest
     environment: staging
     strategy:

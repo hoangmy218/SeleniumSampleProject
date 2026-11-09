@@ -1,5 +1,5 @@
 # .github/workflows/test.yml
-name: QA Test Suite
+name: QA Test Suite - Event Triggered CI
 
 on:
   push:
@@ -18,10 +18,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: staging
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [chrome, firefox]
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -40,8 +36,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Run tests on ${{ matrix.browser }}
-        run: mvn clean verify -Dbrowser=${{ matrix.browser }} -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
+      - name: Run tests
+        run: mvn clean verify -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
       - name: Build test report
         if: always()
         run: |
