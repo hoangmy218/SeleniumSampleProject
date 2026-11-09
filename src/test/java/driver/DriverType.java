@@ -26,6 +26,8 @@ public enum DriverType implements DriverSetup {
                 //Set headless mode
                 options.addArguments("--headless");
             }
+            options.addArguments("--width=1920");
+            options.addArguments("--height=1080");
             FirefoxProfile firefoxProfile = new FirefoxProfile();
             firefoxProfile.setPreference("browser.download.folderList", 2);
             firefoxProfile.setPreference("browser.download.manager.showWhenStarting", false);

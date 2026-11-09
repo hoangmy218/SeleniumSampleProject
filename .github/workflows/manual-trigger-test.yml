@@ -83,6 +83,14 @@ jobs:
           name: allure-results-${{ matrix.browser }}
           path: ./allure-results-${{ matrix.browser }}.zip
           compression-level: 0
+
+#      - name: Upload Allure report history
+#          if: always()
+#          uses: actions/upload-artifact@v7
+#          with:
+#            name: allure-results-${{ matrix.browser }}
+#            path: ./allure-results-${{ matrix.browser }}.zip
+#            compression-level: 0
   report:
     runs-on: ubuntu-latest
     if: always()
@@ -126,7 +134,7 @@ jobs:
         # Building the multistage report from all fetched dump archives
         run: |
           npm install -g allure
-          allure generate target/allure-results --output=target/allure-report --clean
+          allure generate target/allure-results --config allure3.js --output=target/allure-report --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
