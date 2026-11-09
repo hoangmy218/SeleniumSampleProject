@@ -39,7 +39,11 @@ public enum DriverType implements DriverSetup {
             firefoxProfile.setPreference("browser.download.manager.showAlertOnComplete", false);
             firefoxProfile.setPreference("browser.download.manager.closeWhenDone", false);
             // Automatically setup the Firefox driver
-            WebDriverManager.firefoxdriver().setup();
+            // If not run on CI env - GitHub Action, use WebDriverManager
+            if (System.getenv("CI") == null) {
+                WebDriverManager.firefoxdriver().setup();
+            }
+            //If run on CI env - GitHub Action, Selenium will auto find geckodriver from PATH system that GitHub Action installed
 
             // return the WebDriver instance
             return new FirefoxDriver(options);
