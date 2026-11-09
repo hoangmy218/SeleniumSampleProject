@@ -113,7 +113,6 @@ jobs:
           unzip -o "allure-results-chrome.zip" -d target/allure-results
           unzip -o "allure-results-firefox.zip" -d target/allure-results
           if [ -d "gh-pages-history/history" ]; then
-            cp -r gh-pages-history/history target/allure-results/
             echo "History restored successfully!"
           else
             echo "No previous history found. Starting fresh."
