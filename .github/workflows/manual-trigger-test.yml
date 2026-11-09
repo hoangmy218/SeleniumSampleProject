@@ -80,6 +80,7 @@ jobs:
           compression-level: 0
   report:
     runs-on: ubuntu-latest
+    if: always()
     needs: manual-trigger-job
     steps:
       # ...
