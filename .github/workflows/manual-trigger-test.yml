@@ -1,5 +1,5 @@
 # .github/workflows/test.yml
-name: QA Test Suite
+name: QA Test Suite - Manual Trigger
 
 on:
   workflow_dispatch:
