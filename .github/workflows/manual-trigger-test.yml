@@ -76,7 +76,7 @@ jobs:
 
   report:
     runs-on: ubuntu-latest
-
+    if: always()
     needs: manual-trigger-job
     steps:
       # ...
