@@ -74,21 +74,6 @@ jobs:
           path: ./allure-results-${{ matrix.browser }}.zip
           compression-level: 0
 
-      - name: List Files in Workspace
-        run: |
-          echo "=== Root Files ==="
-          ls -la
-          echo "=== Full Directory Tree ==="
-          find . -not -path '*/.*' # Lists all files while skipping hidden folders like .git
-
-      - name: Upload Allure history
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: history
-          path: ./history.jsonl
-          compression-level: 0
-
   report:
     runs-on: ubuntu-latest
     if: always()
@@ -100,20 +85,6 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v7
-
-      # Fetching the dump archive of history for the Chrome test run
-      - name: Download allure history from chrome
-        uses: actions/download-artifact@v6
-        with:
-          name: history
-          path: ./
-
-      # Fetching the dump archive of history for the Firefox test run
-      - name: Download allure history from firefox
-        uses: actions/download-artifact@v6
-        with:
-          name: history
-          path: ./
 
       # Fetching the dump archive for the Chrome test run
       - name: Download allure results from chrome
@@ -134,6 +105,13 @@ jobs:
         run: |
           npm install -g allure
           allure generate --dump="allure-results-*.zip" --config allure3.js --output=./allure-report
+
+      - name: List Files in Workspace
+        run: |
+          echo "=== Root Files ==="
+          ls -la
+          echo "=== Full Directory Tree ==="
+          find . -not -path '*/.*' # Lists all files while skipping hidden folders like .git
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
