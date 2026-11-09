@@ -1,0 +1,159 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.example:SeleniumSampleProject:jar:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 36, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -----------------< org.example:SeleniumSampleProject >------------------
+[INFO] Building selenium-sample-project 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Loaded 24421 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Loaded 64 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ SeleniumSampleProject ---
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ SeleniumSampleProject ---
+[INFO] skip non existing resourceDirectory /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ SeleniumSampleProject ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ SeleniumSampleProject ---
+[INFO] Copying 5 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ SeleniumSampleProject ---
+[WARNING] I/O error reading dependency state: /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/classes: /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/classes
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 27 source files with javac [debug target 16] to target/test-classes
+[WARNING] system modules path not set in conjunction with -source 16
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ SeleniumSampleProject ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] TestNG is present. Adding per default org.junit.support:testng-engine:1.1.0
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ SeleniumSampleProject ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/SeleniumSampleProject-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- failsafe:3.5.4:integration-test (default) @ SeleniumSampleProject ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[WARNING] System property [browser] overwritten by user properties from Maven session
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+ 
+Current Operating System: LINUX
+Current Architecture: amd64
+Current Browser Selection: FIREFOX
+ 
+ 
+Current Operating System: LINUX
+Current Architecture: amd64
+Current Browser Selection: FIREFOX
+ 
+This test checks a condition before deciding to run.
+Written screenshot to /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/screenshots/1794241088159_verifyValidationMessageOnCardExpMonthField.png
+Test Failed at page: https://automationexercise.com//payment
+[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 1, Time elapsed: 24.95 s <<< FAILURE! -- in TestSuite
+[ERROR] tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField[Elly Han, 1023456789](1) -- Time elapsed: 2.736 s <<< FAILURE!
+org.openqa.selenium.ElementClickInterceptedException: 
+Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_2" name="aswift_2" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=3&uci=a!3&btvi=2"> obscures it
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [74f35030-43ce-45e1-8356-b0cbb5f5f9a7, clickElement {id=bd8c1ec1-e7f0-4826-b2bd-c7c28c4dddc4}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2814, moz:profile: /tmp/rust_mozprofilezDUHXc, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (74f35030-43ce-45e1-8356-b0cbb5f5f9a7)] -> css selector: [data-qa='pay-button']]
+Session ID: 74f35030-43ce-45e1-8356-b0cbb5f5f9a7
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at jdk.proxy2/jdk.proxy2.$Proxy24.click(Unknown Source)
+	at pages.BasePage.clickElement(BasePage.java:121)
+	at pages.PaymentPage.submitPayment(PaymentPage.java:53)
+	at tests.PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField(PaymentAllureReportTests_IT.java:163)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.testng.internal.thread.graph.TestNGFutureTask.run(TestNGFutureTask.java:22)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   PaymentAllureReportTests_IT.verifyValidationMessageOnCardExpMonthField:163 » ElementClickIntercepted Element <button id="submit" class="form-control btn btn-primary submit-button" type="submit"> is not clickable at point (677,566) because another element <iframe id="aswift_2" name="aswift_2" src="https://googleads.g.doubleclick.net/pagead/html/r20261105/r20190131/zrt_lookup_fy2021.html#RS-1-&adk=1812271801&client=ca-pub-1677597403311019&fa=1&ifi=3&uci=a!3&btvi=2"> obscures it
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '7.0.0-1017-azure', java.version: '17.0.21'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [74f35030-43ce-45e1-8356-b0cbb5f5f9a7, clickElement {id=bd8c1ec1-e7f0-4826-b2bd-c7c28c4dddc4}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 159.0, moz:accessibilityChecks: false, moz:buildID: 20261022150525, moz:geckodriverVersion: 0.37.1, moz:headless: true, moz:platformVersion: 7.0.0-1017-azure, moz:processID: 2814, moz:profile: /tmp/rust_mozprofilezDUHXc, moz:shutdownTimeout: 73000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (X11; Linux x86...}
+Element: [[FirefoxDriver: firefox on linux (74f35030-43ce-45e1-8356-b0cbb5f5f9a7)] -> css selector: [data-qa='pay-button']]
+Session ID: 74f35030-43ce-45e1-8356-b0cbb5f5f9a7
+[INFO] 
+[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 1
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.5.4:verify (default) @ SeleniumSampleProject ---
+[INFO] ------------------------------------------------------------------------
+[ERROR] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  32.103 s
+[INFO] Finished at: 2026-11-09T16:18:15Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.5.4:verify (default) on project SeleniumSampleProject: There are test failures.
+[ERROR] 
+[ERROR] See /home/runner/work/SeleniumSampleProject/SeleniumSampleProject/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
