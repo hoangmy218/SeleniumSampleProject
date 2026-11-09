@@ -121,7 +121,6 @@ jobs:
         # Building the multistage report from all fetched dump archives
         run: |
           npm install -g allure
-#          allure generate --dump="allure-results-*.zip" --output=./allure-report
           allure generate target/allure-results --output=target/allure-report --clean
 
       - name: Publish test report
