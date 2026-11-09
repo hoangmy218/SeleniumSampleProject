@@ -37,12 +37,12 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests
-        run: mvn clean verify -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
+        run: mvn clean verify -Dbrowser=chrome -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
       - name: Build test report
         if: always()
         run: |
           npm install -g allure
-          allure generate target/allure-results --config allure3.js --output target/allure-report --clean
+          allure generate target/allure-results --environment=ubuntu-chrome --config allure3.js --output target/allure-report --clean
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
