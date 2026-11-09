@@ -48,8 +48,8 @@ jobs:
           sudo apt-get install -y google-chrome-stable
       - name: Setup GeckoDriver
         if: matrix.browser == 'firefox'
-        uses: browser-actions/setup-geckodriver@vlatest
-        
+        uses: browser-actions/setup-geckodriver@latest
+
       - name: Cache Maven dependencies
         uses: actions/cache@v5
         with:
