@@ -113,6 +113,7 @@ jobs:
           npm install -g allure
           allure generate --dump="allure-results-*.zip" --config allure3.js --output=./allure-report
 
+      #Check history file
       - name: List Files in Workspace
         run: |
           echo "=== Root Files ==="
