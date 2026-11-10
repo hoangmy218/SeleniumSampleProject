@@ -8,7 +8,7 @@ on:
       - 'README.md'
       - '.gitignore'
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
   schedule:
     #Runs at 3:00 AM every weekday (Monday through Friday)
     - cron: '0 14 * * 1-5'
@@ -43,7 +43,6 @@ jobs:
         run: |
           npm install -g allure
           allure generate target/allure-results --config allure3.js --output target/allure-report --clean
-
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
         if: always()
@@ -51,7 +50,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: target/allure-report
-
       - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v7
