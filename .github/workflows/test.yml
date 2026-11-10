@@ -8,7 +8,7 @@ on:
       - 'README.md'
       - '.gitignore'
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
   schedule:
     #Runs at 3:00 AM every weekday (Monday through Friday)
     - cron: '0 14 * * 1-5'
@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests
-        run: mvn clean verify -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
+        run: mvn clean verify -Dbrowser=chrome -Dheadless=yes -Durl=${{ secrets.BASE_URL }} -Demail=${{ secrets.USER_EMAIL }} -Dpassword=${{ secrets.USER_PASSWORD }}
       - name: Build test report
         if: always()
         run: |
