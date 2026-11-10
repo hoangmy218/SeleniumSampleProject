@@ -56,6 +56,9 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: Get Repo Secret
+        run: echo my TEST_TOKEN=${{ secrets.TEST_TOKEN }}
+
       - name: Run tests on ${{ matrix.browser }} and Save the full state of run into the dump archive
         run: |
           npm install -g allure
@@ -105,6 +108,14 @@ jobs:
         run: |
           npm install -g allure
           allure generate --dump="allure-results-*.zip" --config allure3.js --output=./allure-report
+
+      #Check history file
+      - name: List Files in Workspace
+        run: |
+          echo "=== Root Files ==="
+          ls -la
+          echo "=== Full Directory Tree ==="
+          find . -not -path '*/.*' # Lists all files while skipping hidden folders like .git
 
       - name: Save Allure history cache
         uses: actions/cache/save@v4
