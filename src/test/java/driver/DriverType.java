@@ -112,6 +112,8 @@ public enum DriverType implements DriverSetup {
                 //Set headless mode
                 options.addArguments("--headless=new");
             }
+            options.addArguments("--width=1920");
+            options.addArguments("--height=1080");
             WebDriverManager.edgedriver().setup();
             return new EdgeDriver(options);
         }
