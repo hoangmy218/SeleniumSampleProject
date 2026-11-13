@@ -10,9 +10,12 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -99,8 +102,32 @@ public enum DriverType implements DriverSetup {
             chromePreferences.put("profile.password_manager_enabled", false);
 
             options.setExperimentalOption("prefs", chromePreferences);
-            WebDriverManager.chromedriver().setup();
-            return new ChromeDriver(options);
+
+            // --- ENVIRONMENT DETECTION ---
+            // Retrieve SELENIUM_URL from environment variables (Docker) or System Properties (Maven command line)
+            String seleniumUrl = System.getenv("SELENIUM_URL");
+            if (seleniumUrl == null || seleniumUrl.isEmpty()) {
+                seleniumUrl = System.getProperty("selenium.url");
+            }
+
+            WebDriver driver;
+
+            if (seleniumUrl != null && !seleniumUrl.isEmpty()) {
+                // --- CASE 1: RUNNING ON DOCKER / REMOTE GRID ---
+                try {
+                    System.out.println("--> Connecting to Remote Driver at: " + seleniumUrl);
+                    driver = new RemoteWebDriver(new URL(seleniumUrl), options);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Invalid Remote WebDriver URL: " + seleniumUrl, e);
+                }
+            } else {
+                // --- CASE 2: RUNNING LOCALLY ON MACHINE (Preserves original local workflow) ---
+                System.out.println("--> Launching Local ChromeDriver...");
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver(options);
+            }
+
+            return driver;
         }
     },
     EDGE {

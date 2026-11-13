@@ -1,0 +1,26 @@
+# Ignore Maven build output and compiled class files
+target/
+*.class
+
+# Ignore Git version control directory and configuration
+.git/
+.gitignore
+
+# Ignore IDE configuration directories and files (IntelliJ IDEA, VS Code, Eclipse)
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Ignore log files, test execution reports, or temporary outputs
+*.log
+*.tmp
+allure-results/
+allure-report/
+failsafe-reports/
+
+# Ignore documentation or non-essential files not required for test execution
+README.md
+docs/

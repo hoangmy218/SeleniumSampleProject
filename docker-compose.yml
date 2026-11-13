@@ -1,0 +1,17 @@
+#Standalone Configuration
+services:
+  chrome:
+    image: selenium/standalone-chrome:119.0
+    shm_size: 2gb
+    ports:
+      - "4444:4444"
+
+  tests:
+    build: .
+    depends_on:
+      - chrome
+    environment:
+      - SELENIUM_URL=http://chrome:4444/wd/hub
+    command: ["mvn", "verify", "-Dbrowser=chrome", "-Dheadless=yes"]
+    volumes:
+      - ./target:/app/target

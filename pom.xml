@@ -17,8 +17,12 @@
         <!-- Dependency version -->
         <selenium.version>4.38.0</selenium.version>
         <!-- Configurable variables -->
-        <threads>2</threads>
+        <threads>1</threads>
         <browser>chrome</browser>
+        <maven.compiler.version>3.16.0</maven.compiler.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j-api.version>2.0.17</slf4j-api.version>
         <slf4j-simple.version>2.0.17</slf4j-simple.version>
         <webdrivermanager.version>6.3.3</webdrivermanager.version>
@@ -36,9 +40,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
             <plugin>
