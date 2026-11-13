@@ -10,6 +10,9 @@ history.jsonl
 #Report config
 known-issues.json
 
+# Ignore local environment and secret files
+.env
+
 # BlueJ files
 *.ctxt
 

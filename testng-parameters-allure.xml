@@ -9,5 +9,11 @@
             </class>
         </classes>
     </test>
+    <test name="Database Integration Test">
+        <classes>
+            <class name="integration.DatabaseIntegrationTest">
+            </class>
+        </classes>
+    </test>
 
 </suite>

@@ -1,4 +1,4 @@
-#Standalone Configuration
+# Standalone Configuration
 services:
   chrome:
     image: selenium/standalone-chrome:119.0
@@ -6,12 +6,37 @@ services:
     ports:
       - "4444:4444"
 
+  # Database service
+  postgres:
+    image: postgres:16-alpine
+    container_name: test-postgres-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    # Define a Healthcheck so that the test container knows when the DB is ready to accept connections.
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U testuser -d testdb" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   tests:
     build: .
     depends_on:
-      - chrome
+      postgres:
+        # Wait until Postgres is fully healthy before running tests
+        condition: service_healthy
+      chrome:
+        condition: service_started
     environment:
       - SELENIUM_URL=http://chrome:4444/wd/hub
-    command: ["mvn", "verify", "-Dbrowser=chrome", "-Dheadless=yes"]
+      # Configuring the connection string for Java code to connect to a Postgres service within a Docker network        - DB_URL=jdbc:postgresql://postgres:5432/testdb
+      - DB_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+    command: [ "mvn", "verify" ]
     volumes:
       - ./target:/app/target
