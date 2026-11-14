@@ -43,15 +43,37 @@ public enum DriverType implements DriverSetup {
             firefoxProfile.setPreference("browser.download.manager.useWindow", false);
             firefoxProfile.setPreference("browser.download.manager.showAlertOnComplete", false);
             firefoxProfile.setPreference("browser.download.manager.closeWhenDone", false);
-            // Automatically setup the Firefox driver
-            // If not run on CI env - GitHub Action, use WebDriverManager
-            if (System.getenv("CI") == null) {
-                WebDriverManager.firefoxdriver().setup();
-            }
-            //If run on CI env - GitHub Action, Selenium will auto find geckodriver from PATH system that GitHub Action installed
 
+            // --- ENVIRONMENT DETECTION ---
+            // Retrieve SELENIUM_URL from environment variables (Docker) or System Properties (Maven command line)
+            String seleniumUrl = System.getenv("SELENIUM_URL");
+            if (seleniumUrl == null || seleniumUrl.isEmpty()) {
+                seleniumUrl = System.getProperty("selenium.url");
+            }
+
+            WebDriver driver;
+
+            if (seleniumUrl != null && !seleniumUrl.isEmpty()) {
+                // --- CASE 1: RUNNING ON DOCKER / REMOTE GRID ---
+                try {
+                    System.out.println("--> Connecting to Remote Driver at: " + seleniumUrl);
+                    driver = new RemoteWebDriver(new URL(seleniumUrl), options);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Invalid Remote WebDriver URL: " + seleniumUrl, e);
+                }
+            } else {
+                // --- CASE 2: RUNNING LOCALLY ON MACHINE ---
+                // If not run on CI env - GitHub Action, use WebDriverManager
+                if (System.getenv("CI") == null) {
+                    System.out.println("--> Launching Local FirefoxDriver...");
+                    WebDriverManager.firefoxdriver().setup();
+                }
+                //If run on CI env - GitHub Action, Selenium will auto find geckodriver from PATH system that GitHub Action installed
+                System.out.println("--> Launching CI Github Action Godeckdriver from Path system...");
+                driver = new FirefoxDriver(options);
+            }
             // return the WebDriver instance
-            return new FirefoxDriver(options);
+            return driver;
         }
     },
     CHROME {

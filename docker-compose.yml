@@ -1,12 +1,6 @@
-# Standalone Configuration
 services:
-  chrome:
-    image: selenium/standalone-chrome:119.0
-    shm_size: 2gb
-    ports:
-      - "4444:4444"
 
-  # Database service
+  # 1. Database PostgreSQL cho Integration Test
   postgres:
     image: postgres:16-alpine
     container_name: test-postgres-db
@@ -14,29 +8,93 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      # Sử dụng biến mở rộng của postgres image để tạo thêm các database phụ tự động
+      POSTGRES_MULTIPLE_DATABASES: "chrome_db,firefox_db"
     ports:
       - "5432:5432"
-    # Define a Healthcheck so that the test container knows when the DB is ready to accept connections.
+    volumes:
+      # (Tùy chọn) Nếu muốn dùng script custom để tạo database
+      - ./init-multiple-dbs.sh:/docker-entrypoint-initdb.d/init-multiple-dbs.sh
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U testuser -d testdb" ]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d main_db"]
       interval: 5s
       timeout: 5s
       retries: 5
 
-  tests:
+  # 2. Selenium Hub (Tổng đài điều phối)
+  selenium-hub:
+    image: selenium/hub:4.51.0
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  # 3. Selenium Chrome Node
+  chrome:
+    image: selenium/node-chrome:156.0-20261101
+    container_name: selenium-node-chrome
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6900:5900" # Cổng VNC để xem live browser qua VNC Viewer nếu cần
+
+  # 4. Selenium Firefox Node
+  firefox:
+    image: selenium/node-firefox:157.0-20261101
+    container_name: selenium-node-firefox
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6901:5900" # Cổng VNC riêng biệt cho Firefox
+
+  # 5. Test Runner (Java / Maven)
+  tests-chrome:
     build: .
+    container_name: test-runner-chrome
     depends_on:
       postgres:
-        # Wait until Postgres is fully healthy before running tests
         condition: service_healthy
+      selenium-hub:
+        condition: service_started
       chrome:
         condition: service_started
     environment:
-      - SELENIUM_URL=http://chrome:4444/wd/hub
-      # Configuring the connection string for Java code to connect to a Postgres service within a Docker network        - DB_URL=jdbc:postgresql://postgres:5432/testdb
-      - DB_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      # Code Java bắn request qua Hub chung thay vì bắn thẳng vào từng browser node lẻ
+      - SELENIUM_URL=http://selenium-hub:4444/wd/hub
+      - DB_URL=jdbc:postgresql://postgres:5432/chrome_db
       - DB_USER=${POSTGRES_USER}
       - DB_PASSWORD=${POSTGRES_PASSWORD}
-    command: [ "mvn", "verify" ]
+    command: ["mvn", "verify", "-Dbrowser=chrome", "-Dheadless=yes"]
     volumes:
-      - ./target:/app/target
+      - ./target-chrome:/app/target
+
+  tests-firefox:
+    build: .
+    container_name: test-runner-firefox
+    depends_on:
+      postgres:
+        condition: service_healthy
+      selenium-hub:
+        condition: service_started
+      firefox:
+        condition: service_started
+    environment:
+      # Code Java bắn request qua Hub chung thay vì bắn thẳng vào từng browser node lẻ
+      - SELENIUM_URL=http://selenium-hub:4444/wd/hub
+      - DB_URL=jdbc:postgresql://postgres:5432/firefox_db
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+    command: [ "mvn", "verify", "-Dbrowser=firefox", "-Dheadless=yes" ]
+    volumes:
+      - ./target-firefox:/app/target
