@@ -8,12 +8,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      # Sử dụng biến mở rộng của postgres image để tạo thêm các database phụ tự động
+      # Use the extension variables of the Postgres image to automatically create additional secondary databases
       POSTGRES_MULTIPLE_DATABASES: "chrome_db,firefox_db"
     ports:
       - "5432:5432"
     volumes:
-      # (Tùy chọn) Nếu muốn dùng script custom để tạo database
+      # (Optional) If want to use a custom script to create the database
       - ./init-multiple-dbs.sh:/docker-entrypoint-initdb.d/init-multiple-dbs.sh
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d main_db"]
@@ -21,7 +21,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # 2. Selenium Hub (Tổng đài điều phối)
+  # 2. Selenium Hub
   selenium-hub:
     image: selenium/hub:4.51.0
     container_name: selenium-hub
@@ -42,7 +42,7 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     ports:
-      - "6900:5900" # Cổng VNC để xem live browser qua VNC Viewer nếu cần
+      - "6900:5900" # VNC port for viewing the live browser via VNC Viewer, if needed
 
   # 4. Selenium Firefox Node
   firefox:
@@ -56,7 +56,7 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     ports:
-      - "6901:5900" # Cổng VNC riêng biệt cho Firefox
+      - "6901:5900"
 
   # 5. Test Runner (Java / Maven)
   tests-chrome:
@@ -70,7 +70,7 @@ services:
       chrome:
         condition: service_started
     environment:
-      # Code Java bắn request qua Hub chung thay vì bắn thẳng vào từng browser node lẻ
+      # Java code that sends requests through a central Hub instead of sending them directly to individual browser nodes
       - SELENIUM_URL=http://selenium-hub:4444/wd/hub
       - DB_URL=jdbc:postgresql://postgres:5432/chrome_db
       - DB_USER=${POSTGRES_USER}
@@ -90,7 +90,6 @@ services:
       firefox:
         condition: service_started
     environment:
-      # Code Java bắn request qua Hub chung thay vì bắn thẳng vào từng browser node lẻ
       - SELENIUM_URL=http://selenium-hub:4444/wd/hub
       - DB_URL=jdbc:postgresql://postgres:5432/firefox_db
       - DB_USER=${POSTGRES_USER}
